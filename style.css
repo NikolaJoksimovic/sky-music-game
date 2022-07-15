@@ -1,0 +1,27 @@
+:root{
+    --clr-white: white;
+    --clr-black: black;
+    --clr-canvas: #D8DDEF;
+    --clr-body: #7293A0;
+}
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--clr-body);
+}
+
+#gameScreen{
+    background-color: var(--clr-canvas);
+    border: 0.2rem solid black;
+}
