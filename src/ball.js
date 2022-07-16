@@ -1,3 +1,5 @@
+import { detectCollision } from "./collisionDetection.js";
+
 export default class Ball{
 
     constructor(game){
@@ -8,7 +10,7 @@ export default class Ball{
 
         this.ballEl = document.getElementById("ball");
         this.position = {x:10, y:10};
-        this.speed = {x:5, y:5};
+        this.speed = {x:7, y:7};
         this.size = 20; //kodiramo velicinu lopte ali meni ne treba to trebutno..mozda za powerUp
     }
 
@@ -31,16 +33,10 @@ export default class Ball{
         if(this.position.y > this.gameHeight - this.size || this.position.y < 0){
             this.speed.y = -this.speed.y;
         }
-        // paddle colision
-        let bottomOfBall = this.position.y + this.size;
-        let topOfPaddle = this.game.paddle.position.y;
-        let leftSideOfPaddle = this.game.paddle.position.x;
-        let rightSideOfPaddle = this.game.paddle.position.x + this.game.paddle.width;
 
-        if(bottomOfBall>topOfPaddle && this.position.x >= leftSideOfPaddle && this.position.x + this.size <= rightSideOfPaddle){
-            // console.log("ues");
-            this.position.y = topOfPaddle - this.size;
+        if(detectCollision(this, this.game.paddle)){
             this.speed.y = -this.speed.y;
+            this.position.y = this.game.paddle.position.y - this.size;
         }
     }
 }

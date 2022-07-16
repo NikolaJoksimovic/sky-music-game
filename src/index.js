@@ -15,7 +15,7 @@ audio1.src = "../assets/sound/backgroundSong1.mp3"
 // START THE GAME
 startBtnEl.addEventListener("click", (e)=>{
     audio1.currentTime = 0;
-    audio1.play();
+    // audio1.play();
 
     clearRect();
 
