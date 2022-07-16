@@ -18,6 +18,12 @@ export default class Paddle{
     // METHODS
 
     draw(ctx){
+        // RANDOM COLOR GENERATOR FOR PADDLE.
+        // let attr1 =  Math.floor(Math.random()*256);
+        // let attr2 =  Math.floor(Math.random()*256);
+        // let attr3 =  Math.floor(Math.random()*256);
+        // let rdmColor = `#${attr1.toString(16)}${attr2.toString(16)}${attr3.toString(16)}`
+        // ctx.fillStyle = rdmColor;
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
 
