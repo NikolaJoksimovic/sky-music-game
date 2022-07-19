@@ -9,6 +9,24 @@
     <title>The Game</title>
 </head>
 <body>
-    
+    <img id="player-img" src="./assets/girlSpriteSheets/ninjaGirlSpriteSheet.png" alt="ninjaGirl.png">
+    <canvas id="canvas1"></canvas>
+    <div class="animation-control">
+        <label for="animations-select">Select an animation:</label>
+        <select name="animations-select" id="animations-select">
+            <option value="attack">attack</option>
+            <option value="climb">climb</option>
+            <option value="dead">dead</option>
+            <option value="glide">glide</option>
+            <option value="idle">idle</option>
+            <option value="jump">jump</option>
+            <option value="jumpAttack">jumpAttack</option>
+            <option value="jumpThrow">jumpThrow</option>
+            <option value="run">run</option>
+            <option value="slide">slide</option>
+            <option value="throw">throw</option>
+        </select>
+    </div>
+    <script type="module" src="main.js"></script>
 </body>
 </html>
