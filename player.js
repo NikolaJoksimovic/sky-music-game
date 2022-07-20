@@ -9,7 +9,7 @@ export default class Player{
         this.y = this.gameHeight-this.height;
         this.playerImg = document.getElementById('player-img');
         this.frameX = 0;
-        this.frameY = 0;
+        this.frameY = 4;
         this.verticalJump = 0;
         this.canGoUp = false;
         this.goUpAgain = false;
@@ -48,10 +48,22 @@ export default class Player{
             this.goUpAgain = false;
         }
 
+        if(!this.onGround()){
+            this.frameY = 7;
+        }
+        else if(input.speed != 0){
+            this.frameY = 8;
+        }else{
+            this.frameY = 4;
+            this.frameX = 2;
+        }
     }
     draw(ctx){
         ctx.fillStyle = 'white';
         ctx.fillRect(this.x, this.y, this.width, this.height);
-        ctx.drawImage(this.playerImg, this.frameX, this.frameY, 250, 200,  this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.playerImg, this.frameX*250, this.frameY*200, this.width, this.height,  this.x, this.y, this.width, this.height);
+    }
+    onGround(){
+        return this.y >= this.gameHeight-this.height;
     }
 }

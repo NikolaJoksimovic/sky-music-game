@@ -10,9 +10,12 @@ export default class Game{
         this.gameObjects = [];
 
         this.input = new InputHanderl(this);
+        
         this.player = new Player(this);
         this.gameObjects.push(this.player);
+        
         this.enemy = new Enemy(this);
+        
         this.background = new Background(this);
     }
 
