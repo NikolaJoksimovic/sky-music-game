@@ -6,7 +6,7 @@ export default class Player{
         this.width = 250;
         this.height = 200;
         this.x = 0;
-        this.y = this.gameHeight-this.height;
+        this.y = this.gameHeight-this.height-50;
         this.playerImg = document.getElementById('player-img');
         this.frameX = 0;
         this.frameY = 4;
@@ -43,8 +43,8 @@ export default class Player{
             this.y = this.gameHeight-2.6*this.height;
             this.canGoUp = false;
         }
-        if(this.y >= this.gameHeight-this.height){
-            this.y = this.gameHeight-this.height;
+        if(this.y >= this.gameHeight-this.height-50){
+            this.y = this.gameHeight-this.height-50;
             this.goUpAgain = false;
         }
 
@@ -60,10 +60,10 @@ export default class Player{
     }
     draw(ctx){
         ctx.fillStyle = 'white';
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        // ctx.fillRect(this.x, this.y, this.width, this.height);
         ctx.drawImage(this.playerImg, this.frameX*250, this.frameY*200, this.width, this.height,  this.x, this.y, this.width, this.height);
     }
     onGround(){
-        return this.y >= this.gameHeight-this.height;
+        return this.y >= this.gameHeight-this.height-50;
     }
 }

@@ -6,7 +6,7 @@ window.addEventListener('load', function(){
     const canvasEl = this.document.getElementById('canvas-main');
     const ctx = canvasEl.getContext('2d');
     canvasEl.width = 1280; 
-    canvasEl.height = 1024;
+    canvasEl.height = 720;
 
     let game = new Game(canvasEl.width, canvasEl.height);
     animate();
