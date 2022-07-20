@@ -20,6 +20,9 @@ body{
 #player-img{
     display: none;
 }
+#enemy-ghost-img{
+    display: none;
+}
 .animation-control{
     font-size: 1.5rem;
     color: white;

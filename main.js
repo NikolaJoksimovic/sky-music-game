@@ -1,4 +1,5 @@
 import Layer from './layer.js';
+import Npc from './npc.js';
 
 window.addEventListener('load', function(){
     const canvasEl = this.document.getElementById('canvas1');
@@ -115,6 +116,15 @@ window.addEventListener('load', function(){
     ];
 
     
+    // NPCs
+    let numOfNpcs = 20;
+    let npcArray = [];
+    for(let i=0; i<numOfNpcs; i++){
+        let npc = new Npc(canvasEl.width, canvasEl.height);
+        npcArray.push(npc);
+    }
+
+
     // "RENDERING"
     let gameFrame = 0;
     const staggerFrames = 5;
@@ -133,6 +143,12 @@ window.addEventListener('load', function(){
         });
         //player
         ctx.drawImage(playerImageEl, frameX, frameY, spriteWidth, spriteHeight, 0, 450, spriteWidth, spriteHeight);
+
+        npcArray.forEach((npc)=>{
+            npc.update(gameFrame, staggerFrames
+                );
+            npc.draw(ctx);
+        });
         
         gameFrame++;
         requestAnimationFrame(animate);
