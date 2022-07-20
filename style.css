@@ -5,11 +5,11 @@
 }
 
 body{
-    background-color: rgb(190, 190, 190);
+    background-color: black;
 }
 
 #canvas1{
-    border: 5px solid black;
+    border: 5px solid white;
     position: absolute;
     top:50%;
     left: 50%;
@@ -19,4 +19,8 @@ body{
 }
 #player-img{
     display: none;
+}
+.animation-control{
+    font-size: 1.5rem;
+    color: white;
 }

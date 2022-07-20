@@ -14,6 +14,7 @@
     <div class="animation-control">
         <label for="animations-select">Select an animation:</label>
         <select name="animations-select" id="animations-select">
+            <option value="run">run</option>
             <option value="attack">attack</option>
             <option value="climb">climb</option>
             <option value="dead">dead</option>
@@ -22,10 +23,13 @@
             <option value="jump">jump</option>
             <option value="jumpAttack">jumpAttack</option>
             <option value="jumpThrow">jumpThrow</option>
-            <option value="run">run</option>
             <option value="slide">slide</option>
             <option value="throw">throw</option>
         </select>
+    </div>
+    <div class="slidercontainer">
+        <p style="color: white;" id="sliderValueText"></p>
+        <input type="range" min="0" max="20" value="1" class="slider">
     </div>
     <script type="module" src="main.js"></script>
 </body>
