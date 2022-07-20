@@ -1,29 +1,16 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing:border-box;
-}
-
 body{
     background-color: black;
 }
-
-#canvas1{
-    border: 5px solid white;
+#canvas-main{
+    background-color: transparent;
     position: absolute;
-    top:50%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border: 4.5px solid white;
     max-width: 90%;
     max-height: 90%;
 }
-#player-img{
+#player-img, #enemy-ghost-img, #forest-bkg{
     display: none;
-}
-#enemy-ghost-img{
-    display: none;
-}
-.animation-control{
-    font-size: 1.5rem;
-    color: white;
 }
