@@ -9,14 +9,16 @@ export default class Enemy{
         this.frameX = 0;
         this.frameY = 0;
         this.x = game.width - this.width;
-        this.y = game.height - 2.2*this.height;
+        this.y = game.height/2 + this.height;
         
         // animation
-        this.speed = 4;
+        this.speed = 10;
         this.maxFrame = 10;
         this.fps = 16.5;
         this.frameTimer = 0;
         this.frameInterval = 1000/this.fps;
+        this.angle = 0;
+        this.angleSpeed = Math.random()*0.2;
 
         // other stuff
         this.radiusCollisionCircle = this.width/3;
@@ -36,6 +38,8 @@ export default class Enemy{
             this.frameTimer+=deltaTime;
         }
         this.x -= this.speed;
+        this.y += 3* Math.cos(this.angle);
+        this.angle += this.angleSpeed;
         if(this.x < 0 - this.width){
             this.markedForDeletion = true;
         }
