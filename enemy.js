@@ -17,7 +17,7 @@ export default class Enemy{
         this.fps = 16.5;
         this.frameTimer = 0;
         this.frameInterval = 1000/this.fps;
-        this.angle = 0;
+        this.angle = 0; 
         this.angleSpeed = Math.random()*0.2;
 
         // other stuff

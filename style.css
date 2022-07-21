@@ -14,3 +14,6 @@ body{
 #player-img, #enemy-ghost-img, #forest-bkg{
     display: none;
 }
+.parallaximg{
+    display: none;
+}
