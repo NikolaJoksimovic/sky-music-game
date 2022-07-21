@@ -38,7 +38,7 @@ export default class Game{
         }
         this.enemies = this.enemies.filter(obj => !obj.markedForDeletion && !obj.dead);
         this.gameObjects = this.gameObjects.filter(obj => !obj.markedForDeletion && !obj.dead);
-
+        
         this.gameObjects.forEach(obj => {
             obj.update(this.input, deltaTime, this.enemies);
         });
@@ -54,10 +54,20 @@ export default class Game{
     }
 
     displayTextStatus(ctx){
+        let maxTextWidht = 400;
         ctx.font = '40px Halvetica';
         ctx.fillStyle = 'black';
         ctx.fillText('Kills: ' + this.score, 20, 50);
-        ctx.fillStyle = 'white';
-        ctx.fillText('Kills: ' + this.score, 21, 53);
+        ctx.fillStyle = '#880808';
+        ctx.fillText('Kills: ' + this.score, 22, 52);
+        if(this.player.gameOver){
+            ctx.font = '70px Halvetica';
+            ctx.textAligh = 'center';
+            ctx.fillStyle = 'black';
+            ctx.fillText('GAME OVER', this.width/2 - maxTextWidht/2, this.height/2, maxTextWidht);
+            ctx.textAligh = 'center';
+            ctx.fillStyle = '#880808';
+            ctx.fillText('GAME OVER', this.width/2 + 2 -maxTextWidht/2, this.height/2 + 2, maxTextWidht);
+        }
     }
 }

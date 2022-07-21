@@ -9,7 +9,6 @@ window.addEventListener('load', function(){
     canvasEl.height = 720;
 
     let game = new Game(canvasEl.width, canvasEl.height);
-    
     let lastTime = 0;
     animate(0);
 
@@ -22,6 +21,9 @@ window.addEventListener('load', function(){
         game.update(deltaTime);
         game.draw(ctx);
 
-        requestAnimationFrame(animate);
+        if(!game.player.gameOver){
+            requestAnimationFrame(animate);
+        }
     }
-});
+    
+}); 

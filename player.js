@@ -27,7 +27,8 @@ export default class Player{
 
         // other
         this.markedForDeletion = false;
-        this.radiusCollisionCircle = this.width/2.5;
+        this.gameOver = false;
+        this.radiusCollisionCircle = this.width/3.5;
     }
     update(input, deltaTime, enemies){
         
@@ -88,12 +89,6 @@ export default class Player{
         this.enemyCollision(enemies);
     }
     draw(ctx){
-        ctx.strokeStyle = 'white';
-        ctx.strokeRect(this.x, this.y, this.width, this.height);
-        ctx.beginPath();
-        ctx.arc(this.x+this.width/2, this.y+this.height/2, this.radiusCollisionCircle, 0, Math.PI*2);
-        ctx.stroke();
-
         ctx.drawImage(this.image, this.frameX*250, this.frameY*200, this.width, this.height,  this.x, this.y, this.width, this.height);
     }
     onGround(){
@@ -103,10 +98,11 @@ export default class Player{
     enemyCollision(enemies){
         enemies.forEach(enemy => {
             const dx = enemy.x + enemy.width/2 - this.x - this.width/2;
-            const dy = Math.abs(enemy.y - this.y);
-            const dr = Math.sqrt(dx*dx + dy*dy);
-            if(dr < (this.radiusCollisionCircle + enemy.radiusCollisionCircle)){
+            const dy = enemy.y + enemy.width/2 - this.y-this.width/2;
+            const dr = dx*dx + dy*dy;
+            if(dr < Math.pow((this.radiusCollisionCircle + enemy.radiusCollisionCircle), 2)){
                 enemy.dead = true;
+                this.gameOver = true;
             }
         });
     }

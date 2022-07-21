@@ -19,7 +19,7 @@ export default class Enemy{
         this.frameInterval = 1000/this.fps;
 
         // other stuff
-        this.radiusCollisionCircle = this.width/2.5;
+        this.radiusCollisionCircle = this.width/3;
         this.markedForDeletion = false;
         this.dead = false;
     }
@@ -41,13 +41,6 @@ export default class Enemy{
         }
     }
     draw(ctx){
-
-        ctx.strokeStyle = 'white';
-        ctx.strokeRect(this.x, this.y, this.width, this.height);
-        ctx.beginPath();
-        ctx.arc(this.x+this.width/2, this.y+this.height/2, this.radiusCollisionCircle, 0, Math.PI*2);
-        ctx.stroke();
-
         ctx.drawImage(this.image, this.frameX*this.width, this.frameY*this.height, this.width, this.height, this.x, this.y, this.width, this.height);
     }
 }
