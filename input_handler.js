@@ -4,7 +4,7 @@ export default class InputHanderl{
         
         this.speed = 0;
         this.vy = -25;
-        this.gravity = 6;
+        this.gravity = 9.8;
 
         this.goRight = false;
         this.goLeft = false;
@@ -14,11 +14,11 @@ export default class InputHanderl{
             switch(e.key){
                 case 'ArrowRight':
                     this.goRight = true;
-                    this.speed = 5;
+                    this.speed = 9;
                     break;
                 case 'ArrowLeft':
                     this.goLeft = true;
-                    this.speed = -5;
+                    this.speed = -9;
                     break;
                 case 'ArrowUp':
                     if(!this.goUp){
@@ -33,7 +33,7 @@ export default class InputHanderl{
                 case 'ArrowRight':
                     this.goRight = false;
                     if(this.goLeft){
-                        this.speed = -5;
+                        this.speed = -9;
                     }else{
                         this.speed = 0;
                     }
@@ -41,7 +41,7 @@ export default class InputHanderl{
                 case 'ArrowLeft':
                     this.goLeft = false;
                     if(this.goRight){
-                        this.speed = 5;
+                        this.speed = 9;
                     }else{
                         this.speed = 0;
                     }

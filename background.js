@@ -6,10 +6,10 @@ export default class Background{
         this.y = 0;
         this.widht = 2400;
         this.height = 720;
-        this.gameSpeed = 6;
+        this.gameSpeed = 5;
     }
 
-    update(input){
+    update(input, deltaTime){
         this.x -= this.gameSpeed;
         if(input.speed>0){
         }

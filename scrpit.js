@@ -9,18 +9,17 @@ window.addEventListener('load', function(){
     canvasEl.height = 720;
 
     let game = new Game(canvasEl.width, canvasEl.height);
-    animate();
+    
+    let lastTime = 0;
+    animate(0);
 
-    function handleEnemies(){
-
-    }
-    function displayStatusText(){
-
-    }
-    function animate(){
+    function animate(timeStamp){
+        const deltaTime = timeStamp - lastTime;
+        lastTime = timeStamp;
         
         ctx.clearRect(0, 0, canvasEl.width, canvasEl.height)
-        game.update();
+        
+        game.update(deltaTime);
         game.draw(ctx);
 
         requestAnimationFrame(animate);

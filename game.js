@@ -12,18 +12,27 @@ export default class Game{
         this.input = new InputHanderl(this);
         this.player = new Player(this);
         this.background = new Background(this);
-        this.enemy = new Enemy(this);
         
         
+        this.enemyInterval = 500;
+        this.enemyTimer = 0;
+        this.randomEnemyInterval = Math.random()*5000;
         
         this.gameObjects.push(this.background);
         this.gameObjects.push(this.player);
         
     }
 
-    update(){
+    update(deltaTime){
+        if(this.enemyTimer > this.enemyInterval + this.randomEnemyInterval){
+            this.gameObjects.push(new Enemy(this));
+            this.enemyTimer = 0;
+            this.randomEnemyInterval = Math.random()*5000;
+        }else{
+            this.enemyTimer += deltaTime;
+        }
         this.gameObjects.forEach(obj => {
-            obj.update(this.input);
+            obj.update(this.input, deltaTime);
         });
     }
 

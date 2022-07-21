@@ -7,14 +7,14 @@ export default class Player{
         this.height = 200;
         this.x = 0;
         this.y = this.gameHeight-this.height-50;
-        this.playerImg = document.getElementById('player-img');
+        this.image = document.getElementById('player-img');
         this.frameX = 0;
         this.frameY = 4;
         this.verticalJump = 0;
         this.canGoUp = false;
         this.goUpAgain = false;
     }
-    update(input){
+    update(input, deltaTime){
         
         // horizontal movement
         this.x += input.speed;
@@ -39,8 +39,8 @@ export default class Player{
         }
         // console.log(input.goUp + " " + this.canGoUp);
         
-        if(this.y <= this.gameHeight-2.6*this.height){
-            this.y = this.gameHeight-2.6*this.height;
+        if(this.y <= this.gameHeight-3.5*this.height){
+            this.y = this.gameHeight-3.5*this.height;
             this.canGoUp = false;
         }
         if(this.y >= this.gameHeight-this.height-50){
@@ -61,7 +61,7 @@ export default class Player{
     draw(ctx){
         ctx.fillStyle = 'white';
         // ctx.fillRect(this.x, this.y, this.width, this.height);
-        ctx.drawImage(this.playerImg, this.frameX*250, this.frameY*200, this.width, this.height,  this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.image, this.frameX*250, this.frameY*200, this.width, this.height,  this.x, this.y, this.width, this.height);
     }
     onGround(){
         return this.y >= this.gameHeight-this.height-50;
