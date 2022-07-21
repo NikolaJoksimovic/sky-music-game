@@ -13,6 +13,10 @@ export default class Player{
         this.verticalJump = 0;
         this.canGoUp = false;
         this.goUpAgain = false;
+        this.maxFrames = 9;
+        this.fps = 16.5;
+        this.frameTimer = 0;
+        this.frameInterval = 1000/this.fps;
     }
     update(input, deltaTime){
         
@@ -49,14 +53,26 @@ export default class Player{
         }
 
         if(!this.onGround()){
+            this.frameInterval = 2000/this.fps;
             this.frameY = 7;
-        }
-        else if(input.speed != 0){
-            this.frameY = 8;
         }else{
-            this.frameY = 4;
-            this.frameX = 2;
+            if(input.speed!=0){
+                this.frameInterval = 500/this.fps;
+            }else{
+                this.frameInterval = 1000/this.fps;
+            }
+            this.frameY = 8;
         }
+        if(this.frameTimer >= this.frameInterval){
+                if(this.frameX >= this.maxFrames){
+                    this.frameX = 0;
+                }else{
+                    this.frameX++;
+                }
+                this.frameTimer = 0;
+            }else{
+                this.frameTimer+=deltaTime;
+            }
     }
     draw(ctx){
         ctx.fillStyle = 'white';
