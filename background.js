@@ -2,14 +2,20 @@ export default class Background{
     constructor(game){
         this.game = game;
         this.backgroundImageEl = document.getElementById("forest-bkg");
+        
+        // posisitoning and measurements
         this.x = 0;
         this.y = 0;
         this.widht = 2400;
         this.height = 720;
+        
+        
+        // other
         this.gameSpeed = 5;
+        this.markedForDeletion = false;
     }
 
-    update(input, deltaTime){
+    update(input, deltaTime, enemies){
         this.x -= this.gameSpeed;
         if(input.speed>0){
         }
