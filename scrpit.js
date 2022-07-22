@@ -2,10 +2,9 @@ import Game from './game.js';
 
 window.addEventListener('load', function(){
 
-
+    
     const canvasEl = this.document.getElementById('canvas-main');
     const ctx = canvasEl.getContext('2d');
-    const goFasterBtn = this.document.getElementById('faster-btn');
     
     canvasEl.width = 1280; 
     canvasEl.height = 720;

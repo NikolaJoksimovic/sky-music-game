@@ -10,6 +10,40 @@ export default class InputHanderl{
         this.goLeft = false;
         this.goUp = false;
         
+        this.goRightBtnClicked = false;
+        this.goLeftBtnClicked = false;
+        this.goUpBtnClicked = false;
+        this.goRightBtn = document.getElementById('right-btn');
+        this.goLeftBtn = document.getElementById('left-btn');
+        this.goUpBtn = document.getElementById('up-btn');
+
+
+        this.goRightBtn.addEventListener("click", e =>{
+            if(!this.goRightBtnClicked){
+                this.goLeftBtnClicked = false;
+                this.goUpBtnClicked = false;
+                this.speed = 9;
+                this.goRightBtnClicked = true;
+            }else{
+                this.speed = 0;
+                this.goRightBtnClicked = false;
+            }
+        });
+        this.goLeftBtn.addEventListener('click', e =>{
+            if(!this.goLeftBtnClicked){
+                this.goRightBtnClicked = false;
+                this.goUpBtnClicked = false;
+                this.speed = -9;
+                this.goLeftBtnClicked = true;
+            }else{
+                this.speed = 0;
+                this.goLeftBtnClicked = false;
+            }
+        });
+        this.goUpBtn.addEventListener('click', e =>{
+            this.speed
+        });
+
         window.addEventListener('keydown', e =>{
             switch(e.key){
                 case 'ArrowRight':
