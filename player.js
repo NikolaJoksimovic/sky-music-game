@@ -86,7 +86,7 @@ export default class Player{
             this.frameTimer+=deltaTime;
         }
 
-        this.enemyCollision(enemies);
+        // this.enemyCollision(enemies);
     }
     draw(ctx){
         ctx.drawImage(this.image, this.frameX*250, this.frameY*200, this.width, this.height,  this.x, this.y, this.width, this.height);
