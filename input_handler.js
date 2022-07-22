@@ -12,7 +12,6 @@ export default class InputHanderl{
         
         this.goRightBtnClicked = false;
         this.goLeftBtnClicked = false;
-        this.goUpBtnClicked = false;
         this.goRightBtn = document.getElementById('right-btn');
         this.goLeftBtn = document.getElementById('left-btn');
         this.goUpBtn = document.getElementById('up-btn');
@@ -41,7 +40,11 @@ export default class InputHanderl{
             }
         });
         this.goUpBtn.addEventListener('click', e =>{
-            this.speed
+            if(!this.goUp){
+                this.goUp = true;
+            }else{
+                this.goUp = false;
+            }
         });
 
         window.addEventListener('keydown', e =>{
