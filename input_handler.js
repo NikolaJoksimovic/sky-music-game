@@ -1,29 +1,19 @@
 export default class InputHanderl{
     constructor(game){
         this.game = game;
-        
-        this.speed = 0;
-        this.vy = -25;
-        this.gravity = 9.8;
 
-        this.goRight = false;
-        this.goLeft = false;
-        this.goUp = false;
+        this.lastKey = '';
         
         window.addEventListener('keydown', e =>{
             switch(e.key){
                 case 'ArrowRight':
-                    this.goRight = true;
-                    this.speed = 9;
+                    this.lastKey = 'ArrowRightPressed'
                     break;
                 case 'ArrowLeft':
-                    this.goLeft = true;
-                    this.speed = -9;
+                    this.lastKey = 'ArrowLeftPressed'
                     break;
                 case 'ArrowUp':
-                    if(!this.goUp){
-                        this.goUp = true;
-                    }
+                    this.lastKey = 'ArrowUpPressed'
                     break;
 
                 }
@@ -31,23 +21,13 @@ export default class InputHanderl{
         window.addEventListener('keyup', e =>{
             switch(e.key){
                 case 'ArrowRight':
-                    this.goRight = false;
-                    if(this.goLeft){
-                        this.speed = -9;
-                    }else{
-                        this.speed = 0;
-                    }
+                    this.lastKey = 'ArrowRightReleased'
                     break;
                 case 'ArrowLeft':
-                    this.goLeft = false;
-                    if(this.goRight){
-                        this.speed = 9;
-                    }else{
-                        this.speed = 0;
-                    }
+                    this.lastKey = 'ArrowLeftReleased'
                     break;
                 case 'ArrowUp':
-                    this.goUp = false;
+                    this.lastKey = 'ArrowUpReleased'
                     break;
             }
         });

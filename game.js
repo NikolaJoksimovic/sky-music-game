@@ -40,10 +40,8 @@ export default class Game{
         this.gameObjects = this.gameObjects.filter(obj => !obj.markedForDeletion && !obj.dead);
         
         this.gameObjects.forEach(obj => {
-            obj.update(this.input, deltaTime, this.enemies);
+            obj.update(this.input.lastKey, deltaTime, this.enemies);
         });
-
-        // console.log(this.enemies);
     }
 
     draw(ctx){
