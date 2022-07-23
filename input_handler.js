@@ -15,8 +15,11 @@ export default class InputHanderl{
                 case 'ArrowUp':
                     this.lastKey = 'ArrowUpPressed'
                     break;
-
+                case 'ArrowDown':
+                    this.lastKey = 'ArrowDownPressed'
+                    break;
                 }
+            console.log(this.lastKey);
             });
         window.addEventListener('keyup', e =>{
             switch(e.key){
@@ -29,7 +32,11 @@ export default class InputHanderl{
                 case 'ArrowUp':
                     this.lastKey = 'ArrowUpReleased'
                     break;
+                case 'ArrowDown':
+                    this.lastKey = 'ArrowDownReleased'
+                    break;
             }
+            console.log(this.lastKey);
         });
     }
 }

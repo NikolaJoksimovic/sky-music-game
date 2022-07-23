@@ -1,4 +1,4 @@
-import {Standing, Running, Jumping} from './states.js'
+import {Standing, RunningRight, JumpingRight, RunningLeft, JumpingLeft} from './states.js'
 export default class Player{
     constructor(game){
         this.game = game;
@@ -13,8 +13,14 @@ export default class Player{
         this.y = this.gameHeight-this.height-50;
         
         //movement
-        this.states = [new Standing(this), new Running(this), new Jumping(this)];
+        this.states = [new Standing(this), new RunningRight(this), new JumpingRight(this), new RunningLeft(this), new JumpingLeft(this)];
         this.currentState = this.states[0];
+        this.speed = 0;
+        this.maxSpeed = 8;
+        this.vy = 0;
+        this.gravity = 0.98;
+        this.runningLeft = false;
+        this.runningRight = false;
         
         // animations
         this.frameX = 0;
@@ -30,9 +36,23 @@ export default class Player{
         this.radiusCollisionCircle = this.width/3.5;
     }
     update(input, deltaTime, enemies){
-
         this.currentState.handleInput(input);
-        this.enemyCollision(enemies);
+        console.log(this.runningLeft, this.runningRight);
+
+        // horizontal movement
+        this.x += this.speed;
+        if(this.x < 0-this.width/3){this.x = 0-this.width/3};
+        if(this.x > this.game.width - this.width*2/3){this.x = this.game.width - this.width*2/3};
+
+        // vertical movement
+        this.y += this.vy;
+        if(!this.playerOnGround()){
+            this.vy += this.gravity;
+        }else{
+            this.vy = 0;
+        }
+
+        // this.enemyCollision(enemies);
     }
     draw(ctx){
         ctx.drawImage(this.image, this.frameX*250, this.frameY*200, this.width, this.height,  this.x, this.y, this.width, this.height);
@@ -53,5 +73,8 @@ export default class Player{
                 this.gameOver = true;
             }
         });
+    }
+    playerOnGround(){
+        return this.y >= this.gameHeight - this.height-50? true : false;
     }
 }
