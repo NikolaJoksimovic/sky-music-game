@@ -1,6 +1,21 @@
 body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     background-color: black;
 }
+button{
+    
+}
+.main-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 800px;
+}
+
+/* CANVAS ELEMENTS */
 #canvas-main{
     background-color: transparent;
     position: absolute;
@@ -16,4 +31,11 @@ body{
 }
 .parallaximg{
     display: none;
+}
+
+
+/* MAIN MENU */
+
+.menu{
+
 }

@@ -2,6 +2,7 @@ import InputHanderl from './input_handler.js';
 import Player from './player.js';
 import Enemy from './enemy.js'
 import Background from './background.js'
+import Menu from './menu.js';
 
 export default class Game{
     constructor(width, height){
@@ -14,6 +15,7 @@ export default class Game{
         this.input = new InputHanderl(this);
         this.player = new Player(this);
         this.background = new Background(this);
+        this.menu = new Menu(this);
         
         
         this.enemyInterval = 500;
@@ -38,7 +40,7 @@ export default class Game{
         }
         this.enemies = this.enemies.filter(obj => !obj.markedForDeletion && !obj.dead);
         this.gameObjects = this.gameObjects.filter(obj => !obj.markedForDeletion && !obj.dead);
-        
+        this.menu.update(deltaTime);
         this.gameObjects.forEach(obj => {
             obj.update(this.input.keys, deltaTime, this.enemies);
         });
@@ -49,6 +51,7 @@ export default class Game{
             obj.draw(ctx);
         })
         this.displayTextStatus(ctx);
+        this.menu.draw(ctx);
     }
 
     displayTextStatus(ctx){
