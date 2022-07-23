@@ -116,7 +116,11 @@ export class JumpingRight extends State{
     }
     handleInput(input){
         if(input === 'ArrowLeftPressed'){
-            this.player.setState(states.JUMPING_LEFT);
+            if(this.player.playerOnGround()){
+                this.player.setState(states.RUNNING_LEFT);
+            }else{
+                this.player.setState(states.JUMPING_LEFT);
+            }
         }
     }
 }
@@ -135,7 +139,13 @@ export class JumpingLeft extends State{
     }
     handleInput(input){
         if(input === 'ArrowRightPressed'){
-            this.player.setState(states.JUMPING_RIGHT);
+            if(this.player.playerOnGround()){
+                this.player.setState(states.RUNNING_RIGHT);
+            }else{
+                this.player.setState(states.JUMPING_RIGHT);
+            }
+        }else if(input === 'ArrowLeftPressed'){
+
         }
     }
 }
