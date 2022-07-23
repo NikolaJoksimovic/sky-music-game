@@ -60,7 +60,19 @@ export default class Player{
             this.vy = 0;
         }
 
-        // this.enemyCollision(enemies);
+        // animation
+        if(this.frameTimer >= this.frameInterval){
+            if(this.frameX < this.maxFrames){
+                this.frameX++;
+            }else{
+                this.frameX = 0;
+            }
+            this.frameTimer = 0;
+        }else{
+            this.frameTimer+=deltaTime;
+        }
+        //Enemy colision
+        this.enemyCollision(enemies);
     }
     draw(ctx){
         ctx.drawImage(this.image, this.frameX*250, this.frameY*200, this.width, this.height,  this.x, this.y, this.width, this.height);

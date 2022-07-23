@@ -23,6 +23,8 @@ export class Idle extends State{
     }
 
     enter(){
+        this.player.frameInterval = 1000/this.player.fps;
+        this.player.maxFrames = 9;
         this.player.frameY = 8;
         this.player.frameX = 0;
         this.player.speed = 0;
@@ -47,12 +49,9 @@ export class RunningRight extends State{
     }
     
     enter(){
+        this.player.frameInterval = 500/this.player.fps;
+        this.player.maxFrames = 9;
         this.player.frameY = 8;
-        if(!this.player.playerOnGround()){
-            this.player.frameY = 7;
-        }else{
-            this.player.frameY = 8;
-        }
         this.player.speed = this.player.maxSpeed;
     }
     handleInput(input){
@@ -72,6 +71,8 @@ export class RunningLeft extends State{
     }
 
     enter(){
+        this.player.frameInterval = 500/this.player.fps;
+        this.player.maxFrames = 9;
         this.player.frameY = 8;
         this.player.speed = -this.player.maxSpeed;
     }
@@ -93,6 +94,9 @@ export class Jumping extends State{
     }
 
     enter(){
+        this.player.frameInterval = 2000/this.player.fps;
+        this.player.maxFrames = 4;
+        this.player.frameX = 0;
         this.player.frameY = 7;
         this.player.vy = -30;
         this.player.speed = 0;
