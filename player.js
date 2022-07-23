@@ -1,4 +1,4 @@
-import {Standing, RunningRight, JumpingRight, RunningLeft, JumpingLeft} from './states.js'
+import {Idle, RunningRight, RunningLeft, Jumping, Falling, JumpingRight, JumpingLeft, FallingRight, FallingLeft} from './states.js'
 export default class Player{
     constructor(game){
         this.game = game;
@@ -12,16 +12,6 @@ export default class Player{
         this.x = 0;
         this.y = this.gameHeight-this.height-50;
         
-        //movement
-        this.states = [new Standing(this), new RunningRight(this), new JumpingRight(this), new RunningLeft(this), new JumpingLeft(this)];
-        this.currentState = this.states[0];
-        this.speed = 0;
-        this.maxSpeed = 8;
-        this.vy = 0;
-        this.gravity = 0.98;
-        this.runningLeft = false;
-        this.runningRight = false;
-        
         // animations
         this.frameX = 0;
         this.frameY = 0;
@@ -30,15 +20,33 @@ export default class Player{
         this.frameTimer = 0;
         this.frameInterval = 1000/this.fps;
 
+        //movement
+        this.states = [
+            new Idle(this),
+            new RunningRight(this),
+            new RunningLeft(this),
+            new Jumping(this),
+            new Falling(this),
+            new JumpingRight(this),
+            new JumpingLeft(this),
+            new FallingRight(this),
+            new FallingLeft(this),
+
+        ];
+        this.currentState = this.states[0];
+        console.log(this.currentState);
+        this.currentState.enter();
+        this.speed = 0;
+        this.maxSpeed = 9;
+        this.vy = 0;
+        this.gravity = 0.98;
+
         // other
-        this.markedForDeletion = false;
         this.gameOver = false;
         this.radiusCollisionCircle = this.width/3.5;
     }
     update(input, deltaTime, enemies){
         this.currentState.handleInput(input);
-        console.log(this.runningLeft, this.runningRight);
-
         // horizontal movement
         this.x += this.speed;
         if(this.x < 0-this.width/3){this.x = 0-this.width/3};
@@ -57,12 +65,6 @@ export default class Player{
     draw(ctx){
         ctx.drawImage(this.image, this.frameX*250, this.frameY*200, this.width, this.height,  this.x, this.y, this.width, this.height);
     }
-    
-    setState(state){
-        this.currentState = this.states[state];
-        this.currentState.enter();
-    }
-
     enemyCollision(enemies){
         enemies.forEach(enemy => {
             const dx = enemy.x + enemy.width/2 - this.x - this.width/2;
@@ -73,6 +75,10 @@ export default class Player{
                 this.gameOver = true;
             }
         });
+    }
+    setState(state){
+        this.currentState = this.states[state];
+        this.currentState.enter();
     }
     playerOnGround(){
         return this.y >= this.gameHeight - this.height-50? true : false;
