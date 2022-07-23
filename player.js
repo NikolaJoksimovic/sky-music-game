@@ -34,7 +34,6 @@ export default class Player{
 
         ];
         this.currentState = this.states[0];
-        console.log(this.currentState);
         this.currentState.enter();
         this.speed = 0;
         this.maxSpeed = 9;

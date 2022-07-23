@@ -51,7 +51,6 @@ window.addEventListener('load', function(){
     
 
         enemyCollisionBtnEl.addEventListener('click', e=>{
-            console.log(e.target.value);
             if(e.target.value === 'on'){
                 enemyCollisionBtnEl.innerHTML = `enemy collision: off`
                 e.target.value = 'off';
