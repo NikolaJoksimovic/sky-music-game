@@ -59,7 +59,7 @@ export default class Game{
         ctx.font = '40px Halvetica';
         ctx.fillStyle = 'black';
         ctx.fillText('Kills: ' + this.score, 20, 50);
-        ctx.fillStyle = '#880808';
+        ctx.fillStyle = 'hsl(0, 84%, 17%)';
         ctx.fillText('Kills: ' + this.score, 22, 52);
         if(this.player.gameOver){
             ctx.font = '70px Halvetica';
@@ -67,7 +67,7 @@ export default class Game{
             ctx.fillStyle = 'black';
             ctx.fillText('GAME OVER', this.width/2 - maxTextWidht/2, this.height/2, maxTextWidht);
             ctx.textAligh = 'center';
-            ctx.fillStyle = '#880808';
+            ctx.fillStyle = 'hsl(0, 84%, 17%)';
             ctx.fillText('GAME OVER', this.width/2 + 2 -maxTextWidht/2, this.height/2 + 2, maxTextWidht);
         }
     }

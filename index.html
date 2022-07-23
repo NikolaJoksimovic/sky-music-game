@@ -10,7 +10,22 @@
 </head>
 <body>
     <div class="main-container">
-        <div class="menu"></div>
+        <div class="menu">
+            <div class="buttons">
+                <button class="play-btn">play</button>
+                <button class="options-btn">options</button>
+                <button class="controls-btn">controls</button>
+            </div>
+        </div>
+
+        <div class="options-container">
+            <div class="options">
+                <button id="options-enemy-collision" class="primary-btn" value="on">Enemy collision: ON</button>
+            </div>
+        </div>
+        <div class="controls-container"></div>
+        <button class="back-btn primary-btn">back</button>
+    </div>
         <canvas id="canvas-main"></canvas>
         <!-- player -->
         <img id="player-img" src="./assets/girlSpriteSheets/ninjaGirlSpriteSheet.png" alt="ninjaGirl.png">
@@ -22,7 +37,6 @@
         <img class="parallaximg" id="layer3" src="./assets/forestBackground/Cartoon_Forest_BG_02/Layers/Middle_Decor.png" alt="">
         <img class="parallaximg" id="layer4" src="./assets/forestBackground/Cartoon_Forest_BG_02/Layers/Foreground.png" alt="">
         <img class="parallaximg" id="layer5" src="./assets/forestBackground/Cartoon_Forest_BG_02/Layers/Ground.png" alt="">
-    </div>
 
     <script type="module" src="./scrpit.js"></script>
 </body>

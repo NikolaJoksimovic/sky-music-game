@@ -43,6 +43,7 @@ export default class Player{
 
         // other
         this.gameOver = false;
+        this.enemyCollisionEnabled = true;
         this.radiusCollisionCircle = this.width/3.5;
     }
     update(input, deltaTime, enemies){
@@ -72,7 +73,9 @@ export default class Player{
             this.frameTimer+=deltaTime;
         }
         //Enemy colision
-        this.enemyCollision(enemies);
+        if(this.enemyCollisionEnabled){
+            this.enemyCollision(enemies);
+        }
     }
     draw(ctx){
         ctx.drawImage(this.image, this.frameX*250, this.frameY*200, this.width, this.height,  this.x, this.y, this.width, this.height);
