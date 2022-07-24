@@ -1,4 +1,16 @@
-import {Idle, RunningRight, RunningLeft, Jumping, Falling, JumpingRight, JumpingLeft, FallingRight, FallingLeft} from './states.js'
+import {
+    Idle,
+    RunningRight, 
+    RunningLeft, 
+    Jumping, 
+    Falling, 
+    JumpingRight, 
+    JumpingLeft, 
+    FallingRight, 
+    FallingLeft,
+    Attacking
+} from './states.js'
+
 export default class Player{
     constructor(game){
         this.game = game;
@@ -19,6 +31,8 @@ export default class Player{
         this.fps = 16.5;
         this.frameTimer = 0;
         this.frameInterval = 1000/this.fps;
+        this.attackAnimationTimer = 290;
+        this.attackAnimationInterval = 290;
 
         //movement
         this.states = [
@@ -31,7 +45,7 @@ export default class Player{
             new JumpingLeft(this),
             new FallingRight(this),
             new FallingLeft(this),
-
+            new Attacking(this)
         ];
         this.currentState = this.states[0];
         this.currentState.enter();
@@ -46,6 +60,7 @@ export default class Player{
         this.radiusCollisionCircle = this.width/3.5;
     }
     update(input, deltaTime, enemies){
+        this.attackAnimationTimer+=deltaTime;
         this.currentState.handleInput(input);
         // horizontal movement
         this.x += this.speed;
@@ -96,5 +111,8 @@ export default class Player{
     }
     playerOnGround(){
         return this.y >= this.gameHeight - this.height-50? true : false;
+    }
+    playerAttacking(){
+        return this.attackAnimationTimer < this.attackAnimationInterval;
     }
 }

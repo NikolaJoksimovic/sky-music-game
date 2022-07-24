@@ -8,17 +8,18 @@ export default class InputHanderl{
                 e.key === 'ArrowUp' ||
                 e.key === 'ArrowRight' ||
                 e.key === 'ArrowLeft' ||
-                e.key === 'Enter') &&
+                e.key === ' ') &&
                 this.keys.indexOf(e.key) === -1){
                     this.keys.push(e.key);
                 }
+                // console.log('space');
         });
         window.addEventListener('keyup', e =>{
             if((e.key === 'ArrowDown' ||
                 e.key === 'ArrowUp' ||
                 e.key === 'ArrowRight' ||
                 e.key === 'ArrowLeft' ||
-                e.key === 'Enter')){
+                e.key === ' ')){
                     this.keys.splice(this.keys.indexOf(e.key), 1);
                 }
         });

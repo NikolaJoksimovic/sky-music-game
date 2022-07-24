@@ -26,6 +26,8 @@ window.addEventListener('load', function(){
     // //////////////////////////////////////////////////////////////
     canvasEl.width = 1280; 
     canvasEl.height = 720;
+    let canvasX = canvasEl.offsetLeft;
+    let canvasY = canvasEl.offsetTop;
     
     optionsBtnEl.addEventListener('click', e=>{
         // console.log("hey")
@@ -50,17 +52,17 @@ window.addEventListener('load', function(){
     });
     
 
-        enemyCollisionBtnEl.addEventListener('click', e=>{
-            if(e.target.value === 'on'){
-                enemyCollisionBtnEl.innerHTML = `enemy collision: off`
-                e.target.value = 'off';
-                enableCollision = false;
-            }else{
-                enemyCollisionBtnEl.innerHTML = `enemy collision: on`
-                e.target.value = 'on';
-                enableCollision = true;
-            }
-        });
+    enemyCollisionBtnEl.addEventListener('click', e=>{
+        if(e.target.value === 'on'){
+            enemyCollisionBtnEl.innerHTML = `enemy collision: off`
+            e.target.value = 'off';
+            enableCollision = false;
+        }else{
+            enemyCollisionBtnEl.innerHTML = `enemy collision: on`
+            e.target.value = 'on';
+            enableCollision = true;
+        }
+    });
     playBtnEl.addEventListener('click', e=>{
         gamePaused = false;
         mainContainerEl.classList.add('hide-main-container');
@@ -73,13 +75,24 @@ window.addEventListener('load', function(){
             width: game.menu.width,
             height: game.menu.height
         }
-
+        canvasEl.addEventListener('mousemove', e=>{
+            // console.log(e.target);
+            // let x = e.pageX - canvasX;
+            // let y = e.pageX - canvasY;
+            // console.log(x, y);
+            let mousePos = getMousePos(canvasEl, e);
+            if(isInside(mousePos, menu_btn)){
+                canvasEl.style.cursor = 'pointer';
+            }else{
+                canvasEl.style.cursor = 'default';   
+            }
+        })
         canvasEl.addEventListener('click', e=>{
-        let mousePos = getMousePos(canvasEl, e);
-        if(isInside(mousePos, menu_btn)){
-            mainContainerEl.classList.remove('hide-main-container');
-            gamePaused = true;
-        } 
+            let mousePos = getMousePos(canvasEl, e);
+            if(isInside(mousePos, menu_btn)){
+                mainContainerEl.classList.remove('hide-main-container');
+                gamePaused = true;
+            }
         });
 
         animate(0);

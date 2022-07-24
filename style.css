@@ -1,8 +1,10 @@
 :root{
+    --clr-transperent: hsl(0, 0%, 0%);
     --clr-black05: hsla(0, 0%, 0%, 0.5);
     --clr-black08: hsla(0, 0%, 0%, 0.8);
     --clr-black095: hsla(0, 0%, 0%, 0.95);
     --clr-blood-red: hsl(0, 84%, 17%);
+    --clr-button-shadow: hsl(0, 54%, 15%);
     --clr-white: rgba(255, 255, 255);
     --clr-white05: rgba(255, 255, 255, 0.5);
     --clr-white08: rgba(255, 255, 255, 0.8);
@@ -25,6 +27,14 @@ button{
     width: 100%;
     background-color: transparent;
     border: 0.2rem solid var(--clr-white08);
+}
+button:hover{
+    cursor: pointer;
+    background-color: var(--clr-blood-red);
+    box-shadow: 0px 5px 10px 2px var(--clr-button-shadow),
+                0px -5px 10px 2px var(--clr-button-shadow),
+                5px 0px 10px 2px var(--clr-button-shadow),
+                -5px 0px 10px 2px var(--clr-button-shadow);
 }
 .primary-btn{
     margin: 10px;
@@ -59,7 +69,7 @@ button{
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: var(--clr-blood-red);
+    background-color: var(--clr-transperent);
     width: 350px;
     height: 500px;
     max-width: 90%;

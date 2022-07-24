@@ -8,6 +8,7 @@ const states = {
     JUMPING_LEFT:       6,
     FALLING_RIGHT:      7,
     FALLING_LEFT:       8,
+    ATTACKING:          9,
 }
 
 class State{
@@ -38,6 +39,8 @@ export class Idle extends State{
                 this.player.setState(states.RUNNING_LEFT);
             }else if(input.includes('ArrowUp') && this.player.playerOnGround()){
                 this.player.setState(states.JUMPING);
+            }else if(input.includes(' ')){
+                this.player.setState(states.ATTACKING);
             }
         }
     }
@@ -61,6 +64,8 @@ export class RunningRight extends State{
             this.player.setState(states.IDLE);
         }else if(input.includes('ArrowUp') && this.player.playerOnGround()){
             this.player.setState(states.JUMPING);
+        }else if(input.includes(' ')){
+                this.player.setState(states.ATTACKING);
         }
     }
 }
@@ -83,7 +88,9 @@ export class RunningLeft extends State{
             this.player.setState(states.IDLE);
         }else if(input.includes('ArrowUp') && this.player.playerOnGround()){
             this.player.setState(states.JUMPING);
-        }
+        }else if(input.includes(' ')){
+                this.player.setState(states.ATTACKING);
+            }
     }
 }
 
@@ -202,4 +209,24 @@ export class FallingLeft extends State{
 
 function comesAfter(element1, element2, array){
     return array.indexOf(element1) > array.indexOf(element2);
+}
+
+export class Attacking extends State{
+    constructor(player) {
+        super('ATTACKING');
+        this.player = player;
+    }
+    enter(){
+        this.player.frameInterval = 100/this.player.fps; //miliseconds
+        this.player.frameY = 0;
+        this.player.frameX = 2;
+        this.player.maxFrames = 7;
+        this.player.speed = 0;
+        this.player.attackAnimationTimer = 0;
+    }
+    handleInput(input){
+        if(!this.player.playerAttacking()){
+            this.player.setState(states.IDLE);
+        }
+    }
 }
