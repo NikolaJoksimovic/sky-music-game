@@ -8,7 +8,8 @@ import {
     JumpingLeft, 
     FallingRight, 
     FallingLeft,
-    Attacking
+    Attacking,
+    JumpAttacking
 } from './states.js'
 
 export default class Player{
@@ -45,7 +46,8 @@ export default class Player{
             new JumpingLeft(this),
             new FallingRight(this),
             new FallingLeft(this),
-            new Attacking(this)
+            new Attacking(this),
+            new JumpAttacking(this)
         ];
         this.currentState = this.states[0];
         this.currentState.enter();
