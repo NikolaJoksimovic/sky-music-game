@@ -102,8 +102,12 @@ export default class Player{
             const dy = enemy.y + enemy.width/2 - this.y-this.width/2;
             const dr = dx*dx + dy*dy;
             if(dr < Math.pow((this.radiusCollisionCircle + enemy.radiusCollisionCircle), 2)){
-                enemy.dead = true;
-                this.gameOver = true;
+                if(this.playerAttacking()){
+                    enemy.dead = true;
+                    this.game.score++;
+                }else{
+                    this.gameOver = true;
+                }
             }
         });
     }
