@@ -6,6 +6,7 @@
     --clr-white: rgba(255, 255, 255);
     --clr-white05: rgba(255, 255, 255, 0.5);
     --clr-white08: rgba(255, 255, 255, 0.8);
+    --clr-primary-text: rgba(255, 255, 255, 0.8);
     --clr-white09: rgba(255, 255, 255, 0.9);
     --clr-green: rgba(17, 107, 10, 0.74);
 }
@@ -26,9 +27,10 @@ button{
     border: 0.2rem solid var(--clr-white08);
 }
 .primary-btn{
+    margin: 10px;
     font-size: 1.5rem;
     text-transform: uppercase;
-    color: var(--clr-white08);
+    color: var(--clr-primary-text);
     letter-spacing: 3px;
     z-index: 11;
 }
@@ -78,7 +80,7 @@ button{
 .buttons button{
     font-size: 1.5rem;
     text-transform: uppercase;
-    color: var(--clr-white08);
+    color: var(--clr-primary-text);
     letter-spacing: 3px;
 }
 .main-container {
@@ -99,14 +101,13 @@ button{
     z-index: -10;
 }
 .options-container, .controls-container{
+    background-color: var(--clr-black095);
     position: absolute;
+    justify-content: space-around;
+    align-items: center;
     z-index: 10;
     width: 100vw;
     height: 100vh;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: var(--clr-black095);
     display: none;
 
 }
@@ -127,4 +128,13 @@ button{
 }
 .back-btn-show{
     display: block;
+}
+.controls div, .controls-desc div{
+    min-width: 200px;
+}
+.controls-desc div{
+    text-align: left;
+}
+.controls div{
+    text-align: center;
 }
