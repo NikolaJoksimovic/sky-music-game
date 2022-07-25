@@ -13,12 +13,14 @@ window.addEventListener('load', function(){
     controlsContainerEl = this.document.querySelector('.controls-container'),
     backBtnEl = this.document.querySelector('.back-btn'),
     menuEl = this.document.querySelector('.menu'),
-    enemyCollisionBtnEl = this.document.querySelector('#options-enemy-collision');
+    enemyCollisionBtnEl = this.document.querySelector('#options-enemy-collision'),
+    hitboxesEl = this.document.querySelector('#options-hitboxes');
     
     let lastTime = 0;
     let gamePaused = true;
     let game = new Game();
     let enableCollision = true;
+    let enableHitboxes = false;
 
     // /////////////////////////////////////////////////////////////
 
@@ -63,12 +65,24 @@ window.addEventListener('load', function(){
             enableCollision = true;
         }
     });
+    hitboxesEl.addEventListener('click', e=>{
+        if(e.target.value === 'on'){
+            hitboxesEl.innerHTML = `hitboxes: off`
+            e.target.value = 'off';
+            enableHitboxes = false;
+        }else{
+            hitboxesEl.innerHTML = `hitboxes: on`
+            e.target.value = 'on';
+            enableHitboxes = true;
+        }
+    });
     playBtnEl.addEventListener('click', e=>{
         gamePaused = false;
         mainContainerEl.classList.add('hide-main-container');
         game = new Game(canvasEl.width, canvasEl.height);
         game.player.gameOver = false;
         game.player.enemyCollisionEnabled = enableCollision;
+        game.player.enableHitboxes = enableHitboxes;
         let menu_btn = { 
             x: game.menu.x,
             y: game.menu.y,

@@ -148,3 +148,6 @@ button:hover{
 .controls div{
     text-align: center;
 }
+.options{
+    max-width: 600px;
+}

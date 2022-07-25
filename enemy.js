@@ -49,12 +49,12 @@ export default class Enemy{
     draw(ctx){
         ctx.drawImage(this.image, this.frameX*this.width, this.frameY*this.height, this.width, this.height, this.x, this.y, this.width, this.height);
         
+        this.collisionCircleX = this.x+this.width/2-5;
+        this.collisionCircleY = this.y+this.height/2-10;
+        this.collisionCircleR = this.width/2.5;
         // hitboxes
-        if(true){
+        if(this.game.player.enableHitboxes){
             ctx.strokeStyle = 'white';
-            this.collisionCircleX = this.x+this.width/2-5;
-            this.collisionCircleY = this.y+this.height/2-10;
-            this.collisionCircleR = this.width/2.5;
             ctx.beginPath();
             ctx.arc(this.collisionCircleX, this.collisionCircleY, this.collisionCircleR, 0, 2*Math.PI);
             ctx.stroke();

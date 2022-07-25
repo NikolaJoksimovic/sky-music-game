@@ -59,6 +59,7 @@ export default class Player{
         // other
         this.gameOver = false;
         this.enemyCollisionEnabled = true;
+        this.enableHitboxes = false;
     }
     update(input, deltaTime, enemies){
         this.attackAnimationTimer+=deltaTime;
@@ -95,13 +96,13 @@ export default class Player{
     draw(ctx){
         ctx.drawImage(this.image, this.frameX*250, this.frameY*200, this.width, this.height,  this.x, this.y, this.width, this.height);
         
-        if(true){
-
+        this.collisionCircleX = this.x+this.width/1.6;
+        this.collisionCircleY = this.y+this.height/2;
+        this.collisionCircleR = this.width/3;
+        //hitboxes
+        if(this.enableHitboxes){
             ctx.strokeStyle = 'hsl(6, 93%, 71%)';
             ctx.strokeRect(this.x+this.width/3, this.y+20, this.width/3, this.height-20);
-            this.collisionCircleX = this.x+this.width/1.6;
-            this.collisionCircleY = this.y+this.height/2;
-            this.collisionCircleR = this.width/3;
             ctx.beginPath();
             ctx.arc(this.collisionCircleX, this.collisionCircleY, this.collisionCircleR, 0, 2*Math.PI);
             ctx.stroke();
