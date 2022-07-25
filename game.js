@@ -28,7 +28,6 @@ export default class Game{
     }
 
     update(deltaTime){
-        
         if(this.enemyTimer > this.enemyInterval + this.randomEnemyInterval){
             let enemy = new Enemy(this)
             this.enemies.push(enemy);

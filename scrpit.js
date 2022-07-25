@@ -76,10 +76,6 @@ window.addEventListener('load', function(){
             height: game.menu.height
         }
         canvasEl.addEventListener('mousemove', e=>{
-            // console.log(e.target);
-            // let x = e.pageX - canvasX;
-            // let y = e.pageX - canvasY;
-            // console.log(x, y);
             let mousePos = getMousePos(canvasEl, e);
             if(isInside(mousePos, menu_btn)){
                 canvasEl.style.cursor = 'pointer';
@@ -103,7 +99,10 @@ window.addEventListener('load', function(){
         lastTime = timeStamp;
             
         ctx.clearRect(0, 0, canvasEl.width, canvasEl.height)
-            
+        
+        // Updating width and height?
+        // game.width = canvasEl.clientWidth;
+        // game.height = canvasEl.clientHeight;
         game.update(deltaTime);
         game.draw(ctx);
 

@@ -46,5 +46,13 @@ export default class Enemy{
     }
     draw(ctx){
         ctx.drawImage(this.image, this.frameX*this.width, this.frameY*this.height, this.width, this.height, this.x, this.y, this.width, this.height);
+        
+        // hitboxes
+        if(true){
+            ctx.strokeStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(this.x+this.width/2-5, this.y+this.height/2-10, this.width/2.5,0,2*Math.PI);
+            ctx.stroke();
+        }
     }
 }

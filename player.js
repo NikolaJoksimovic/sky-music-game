@@ -23,7 +23,7 @@ export default class Player{
         this.width = 250;
         this.height = 200;
         this.x = 0;
-        this.y = this.gameHeight-this.height-50;
+        this.y = this.gameHeight-this.height-15;
         
         // animations
         this.frameX = 0;
@@ -76,7 +76,7 @@ export default class Player{
         }else{
             this.vy = 0;
         }
-
+        // console.log(this.y);
         // animation
         if(this.frameTimer >= this.frameInterval){
             if(this.frameX < this.maxFrames){
@@ -95,6 +95,15 @@ export default class Player{
     }
     draw(ctx){
         ctx.drawImage(this.image, this.frameX*250, this.frameY*200, this.width, this.height,  this.x, this.y, this.width, this.height);
+        
+        if(true){
+            ctx.strokeStyle = 'hsl(6, 93%, 71%)';
+            ctx.strokeRect(this.x+this.width/3, this.y+20, this.width/3, this.height-20);
+
+            ctx.beginPath();
+            ctx.arc(this.x+this.width/1.6, this.y+this.height/2, this.width/3,0,2*Math.PI);
+            ctx.stroke();
+        }
     }
     enemyCollision(enemies){
         enemies.forEach(enemy => {
@@ -116,7 +125,7 @@ export default class Player{
         this.currentState.enter();
     }
     playerOnGround(){
-        return this.y >= this.gameHeight - this.height-50? true : false;
+        return this.y >= this.gameHeight - this.height-15? true : false;
     }
     playerAttacking(){
         return this.attackAnimationTimer < this.attackAnimationInterval;

@@ -32,17 +32,14 @@ export class Idle extends State{
         this.player.speed = 0;
     }
     handleInput(input){
-        let inputLen = input.length;
-        if(inputLen){
-            if(input.includes('ArrowRight')){
-                this.player.setState(states.RUNNING_RIGHT);
-            }else if(input.includes('ArrowLeft')){
-                this.player.setState(states.RUNNING_LEFT);
-            }else if(input.includes('ArrowUp') && this.player.playerOnGround()){
-                this.player.setState(states.JUMPING);
-            }else if(input.includes(' ')){
-                this.player.setState(states.ATTACKING);
-            }
+        if(input.includes('ArrowRight')){
+            this.player.setState(states.RUNNING_RIGHT);
+        }else if(input.includes('ArrowLeft')){
+            this.player.setState(states.RUNNING_LEFT);
+        }else if(input.includes('ArrowUp') && this.player.playerOnGround()){
+            this.player.setState(states.JUMPING);
+        }else if(input.includes(' ')){
+            this.player.setState(states.ATTACKING);
         }
     }
 }
@@ -107,7 +104,6 @@ export class Jumping extends State{
         this.player.frameX = 0;
         this.player.frameY = 7;
         this.player.vy = -30;
-        this.player.speed = 0;
     }
     handleInput(input){
         if(this.player.vy > this.player.gravity){
@@ -234,7 +230,7 @@ export class Attacking extends State{
         this.player.frameY = 0;
         this.player.frameX = 2;
         this.player.maxFrames = 7;
-        this.player.speed = 0;
+        this.player.speed = -this.player.game.background.layer5Speed;
         this.player.attackAnimationTimer = 0;
     }
     handleInput(input){
