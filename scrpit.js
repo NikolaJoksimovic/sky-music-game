@@ -27,7 +27,7 @@ window.addEventListener('load', function(){
     audio_koraci04.src = './assets/audio/final.koraci04.wav';
     audio_koraci04.volume = 1;
     audio_koraci04.addEventListener('ended', e=>{
-        if(!gamePaused){
+        if(!gamePaused && !game.player.gameOver){
             audio_koraci04.play();
         }
     })
@@ -118,15 +118,13 @@ window.addEventListener('load', function(){
         animate(0);
     });
 
+    // ANIMATE FUNCTION
     function animate(timeStamp){
         const deltaTime = timeStamp - lastTime;
         lastTime = timeStamp;
             
         ctx.clearRect(0, 0, canvasEl.width, canvasEl.height)
         
-        // Updating width and height?
-        // game.width = canvasEl.clientWidth;
-        // game.height = canvasEl.clientHeight;
         game.update(deltaTime);
         game.draw(ctx);
 
