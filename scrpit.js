@@ -23,15 +23,18 @@ window.addEventListener('load', function(){
     let enableHitboxes = false;
 
     // AUIDO /////////////////////////////////////////////////////////////
-    let mainMenuSoundtrac = new Audio();
-    mainMenuSoundtrac.src = './assets/audio/soundtrack-mainmenu.mp3';
-    mainMenuSoundtrac.play();
+    let audio_koraci04 = new Audio();
+    audio_koraci04.src = './assets/audio/final.koraci04.wav';
+    audio_koraci04.volume = 1;
+    audio_koraci04.addEventListener('ended', e=>{
+        if(!gamePaused){
+            audio_koraci04.play();
+        }
+    })
 
     // AUDIO //////////////////////////////////////////////////////////////
     canvasEl.width = 1280; 
     canvasEl.height = 720;
-    let canvasX = canvasEl.offsetLeft;
-    let canvasY = canvasEl.offsetTop;
     
     optionsBtnEl.addEventListener('click', e=>{
         // console.log("hey")
@@ -78,7 +81,12 @@ window.addEventListener('load', function(){
             enableHitboxes = true;
         }
     });
+
+    //  PLAY BUTTON ***********************************
+    // ************************************************
+
     playBtnEl.addEventListener('click', e=>{
+        audio_koraci04.play();        
         gamePaused = false;
         mainContainerEl.classList.add('hide-main-container');
         game = new Game(canvasEl.width, canvasEl.height);
