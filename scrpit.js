@@ -22,10 +22,12 @@ window.addEventListener('load', function(){
     let enableCollision = true;
     let enableHitboxes = false;
 
-    // /////////////////////////////////////////////////////////////
+    // AUIDO /////////////////////////////////////////////////////////////
+    let mainMenuSoundtrac = new Audio();
+    mainMenuSoundtrac.src = './assets/audio/soundtrack-mainmenu.mp3';
+    mainMenuSoundtrac.play();
 
-
-    // //////////////////////////////////////////////////////////////
+    // AUDIO //////////////////////////////////////////////////////////////
     canvasEl.width = 1280; 
     canvasEl.height = 720;
     let canvasX = canvasEl.offsetLeft;
