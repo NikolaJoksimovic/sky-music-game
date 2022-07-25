@@ -24,8 +24,9 @@ window.addEventListener('load', function(){
 
     // AUIDO /////////////////////////////////////////////////////////////
     let audio_koraci04 = new Audio();
-    audio_koraci04.src = './assets/audio/final.koraci04.wav';
+    audio_koraci04.src = './assets/audio/final_koraci04.wav';
     audio_koraci04.volume = 1;
+    audio_koraci04.playbackRate = 1.1;
     audio_koraci04.addEventListener('ended', e=>{
         if(!gamePaused && !game.player.gameOver){
             audio_koraci04.play();
