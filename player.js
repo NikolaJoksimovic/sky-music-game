@@ -59,7 +59,6 @@ export default class Player{
         // other
         this.gameOver = false;
         this.enemyCollisionEnabled = true;
-        this.radiusCollisionCircle = this.width/3.5;
     }
     update(input, deltaTime, enemies){
         this.attackAnimationTimer+=deltaTime;
@@ -97,24 +96,44 @@ export default class Player{
         ctx.drawImage(this.image, this.frameX*250, this.frameY*200, this.width, this.height,  this.x, this.y, this.width, this.height);
         
         if(true){
+
             ctx.strokeStyle = 'hsl(6, 93%, 71%)';
             ctx.strokeRect(this.x+this.width/3, this.y+20, this.width/3, this.height-20);
-
+            this.collisionCircleX = this.x+this.width/1.6;
+            this.collisionCircleY = this.y+this.height/2;
+            this.collisionCircleR = this.width/3;
             ctx.beginPath();
-            ctx.arc(this.x+this.width/1.6, this.y+this.height/2, this.width/3,0,2*Math.PI);
+            ctx.arc(this.collisionCircleX, this.collisionCircleY, this.collisionCircleR, 0, 2*Math.PI);
             ctx.stroke();
         }
     }
     enemyCollision(enemies){
         enemies.forEach(enemy => {
-            const dx = enemy.x + enemy.width/2 - this.x - this.width/2;
-            const dy = enemy.y + enemy.width/2 - this.y-this.width/2;
-            const dr = dx*dx + dy*dy;
-            if(dr < Math.pow((this.radiusCollisionCircle + enemy.radiusCollisionCircle), 2)){
-                if(this.playerAttacking()){
+            if(this.playerAttacking()){
+                const dx = enemy.collisionCircleX - this.collisionCircleX; 
+                const dy = enemy.collisionCircleY - this.collisionCircleY;
+                const dr = dx*dx + dy*dy;
+
+                // console.log(this.collisionCircleR, enemy.collisionCircleR);
+
+                if(Math.sqrt(dr) < this.collisionCircleR + enemy.collisionCircleR){
                     enemy.dead = true;
                     this.game.score++;
-                }else{
+                }
+            }else{
+                let enemyCircle = {
+                    x: enemy.collisionCircleX,
+                    y: enemy.collisionCircleY,
+                    r: enemy.collisionCircleR
+                }
+                let playerRectangle = {
+                    A: {x: this.x+this.width/3, y: this.y+20},
+                    B: {x: this.x+this.width/3, y: this.y+20 + this.height-20},
+                    C: {x: this.x+this.width/3 + this.width/3, y: this.y+20 + this.height-20},
+                    D: {x: this.x+this.width/3 + this.width/3, y: this.y+20},
+                }
+                if(this.intersectCircle(enemyCircle, playerRectangle.A, playerRectangle.B,playerRectangle.C, playerRectangle.D))
+                {
                     this.gameOver = true;
                 }
             }
@@ -129,5 +148,19 @@ export default class Player{
     }
     playerAttacking(){
         return this.attackAnimationTimer < this.attackAnimationInterval;
+    }
+    intersectCircle(S, A, B, C, D){
+        if(S.y >= D.y && S.y <= C.y){
+            // S.y centar a D.y krajnja gornja, C.y krajnja donja tacka strane
+            // treba mi da rastojanje centra od str bude manje od r
+            if((Math.abs(S.x - D.x) < S.r)||(Math.abs(S.x - A.x) < S.r)){
+                return true;
+            }
+        }else if(S.x >= A.x && S.x <= D.x){
+            if((Math.abs(S.y - A.y) < S.r)||(Math.abs(S.y+ - B.y) < S.r)){
+                return true;
+            }
+        }
+        return false;
     }
 }

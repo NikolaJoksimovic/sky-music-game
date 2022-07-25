@@ -21,9 +21,11 @@ export default class Enemy{
         this.angleSpeed = Math.random()*0.2;
 
         // other stuff
-        this.radiusCollisionCircle = this.width/3;
         this.markedForDeletion = false;
         this.dead = false;
+
+        // collision
+        
     }
 
     update(input, deltaTime, enemies){
@@ -50,8 +52,11 @@ export default class Enemy{
         // hitboxes
         if(true){
             ctx.strokeStyle = 'white';
+            this.collisionCircleX = this.x+this.width/2-5;
+            this.collisionCircleY = this.y+this.height/2-10;
+            this.collisionCircleR = this.width/2.5;
             ctx.beginPath();
-            ctx.arc(this.x+this.width/2-5, this.y+this.height/2-10, this.width/2.5,0,2*Math.PI);
+            ctx.arc(this.collisionCircleX, this.collisionCircleY, this.collisionCircleR, 0, 2*Math.PI);
             ctx.stroke();
         }
     }
