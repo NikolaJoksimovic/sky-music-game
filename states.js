@@ -38,7 +38,7 @@ export class Idle extends State{
             this.player.setState(states.RUNNING_LEFT);
         }else if(input.includes('ArrowUp') && this.player.playerOnGround()){
             this.player.setState(states.JUMPING);
-        }else if(input.includes(' ')){
+        }else if(input.includes(' ') && this.player.playerAttackReady()){
             this.player.setState(states.ATTACKING);
         }
     }
@@ -62,7 +62,7 @@ export class RunningRight extends State{
             this.player.setState(states.IDLE);
         }else if(input.includes('ArrowUp') && this.player.playerOnGround()){
             this.player.setState(states.JUMPING);
-        }else if(input.includes(' ')){
+        }else if(input.includes(' ') && this.player.playerAttackReady()){
             this.player.setState(states.ATTACKING);
         }
     }
@@ -86,7 +86,7 @@ export class RunningLeft extends State{
             this.player.setState(states.IDLE);
         }else if(input.includes('ArrowUp') && this.player.playerOnGround()){
             this.player.setState(states.JUMPING);
-        }else if(input.includes(' ')){
+        }else if(input.includes(' ') && this.player.playerAttackReady()){
             this.player.setState(states.ATTACKING);
         }
     }
@@ -112,7 +112,7 @@ export class Jumping extends State{
             this.player.setState(states.JUMPING_RIGHT);
         }else if(input.includes('ArrowLeft')){
             this.player.setState(states.JUMPING_LEFT);
-        }else if(input.includes(' ')){
+        }else if(input.includes(' ') && this.player.playerAttackReady()){
                 this.player.setState(states.JUMP_ATTACKING);
         }
     }
@@ -131,7 +131,7 @@ export class JumpingRight extends State{
             this.player.setState(states.FALLING);
         }else if(input.includes('ArrowLeft') && comesAfter('ArrowLeft', 'ArrowRight', input)){
             this.player.setState(states.JUMPING_LEFT);
-        }else if(input.includes(' ')){
+        }else if(input.includes(' ') && this.player.playerAttackReady()){
                 this.player.setState(states.JUMP_ATTACKING);
         }
     }
@@ -150,7 +150,7 @@ export class JumpingLeft extends State{
             this.player.setState(states.FALLING);
         }else if(input.includes('ArrowRight') && comesAfter('ArrowRight', 'ArrowLeft', input)){
             this.player.setState(states.JUMPING_RIGHT);
-        }else if(input.includes(' ')){
+        }else if(input.includes(' ') && this.player.playerAttackReady()){
                 this.player.setState(states.JUMP_ATTACKING);
         }
     }
@@ -172,7 +172,7 @@ export class Falling extends State{
             this.player.setState(states.FALLING_RIGHT);
         }else if(input.includes('ArrowLeft')){
             this.player.setState(states.FALLING_LEFT);
-        }else if(input.includes(' ')){
+        }else if(input.includes(' ') && this.player.playerAttackReady()){
                 this.player.setState(states.JUMP_ATTACKING);
         }
     }
@@ -191,7 +191,7 @@ export class FallingRight extends State{
             this.player.setState(states.IDLE);
         }else if(input.includes('ArrowLeft') && comesAfter('ArrowLeft', 'ArrowRight', input)){
             this.player.setState(states.FALLING_LEFT);
-        }else if(input.includes(' ')){
+        }else if(input.includes(' ') && this.player.playerAttackReady()){
                 this.player.setState(states.JUMP_ATTACKING);
         }
     }
@@ -210,7 +210,7 @@ export class FallingLeft extends State{
             this.player.setState(states.IDLE);
         }else if(input.includes('ArrowRight') && comesAfter('ArrowRight', 'ArrowLeft', input)){
             this.player.setState(states.FALLING_RIGHT);
-        }else if(input.includes(' ')){
+        }else if(input.includes(' ') && this.player.playerAttackReady()){
                 this.player.setState(states.JUMP_ATTACKING);
         }
     }
@@ -232,6 +232,7 @@ export class Attacking extends State{
         this.player.maxFrames = 7;
         this.player.speed = -this.player.game.background.layer5Speed;
         this.player.attackAnimationTimer = 0;
+        this.player.attackCooldownTimer = 0;
     }
     handleInput(input){
         if(!this.player.playerAttacking()){
@@ -252,6 +253,7 @@ export class JumpAttacking extends State{
         this.player.maxFrames = 7;
         this.player.speed = 0;
         this.player.attackAnimationTimer = 0;
+        this.player.attackCooldownTimer = 0;
     }
     handleInput(input){
         if(!this.player.playerAttacking()){

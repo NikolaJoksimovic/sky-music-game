@@ -32,8 +32,10 @@ export default class Player{
         this.fps = 16.5;
         this.frameTimer = 0;
         this.frameInterval = 1000/this.fps;
-        this.attackAnimationTimer = 290;
         this.attackAnimationInterval = 290;
+        this.attackAnimationTimer = 290;
+        this.attackCooldownInterval = 690;
+        this.attackCooldownTimer = 690;
 
         //movement
         this.states = [
@@ -63,6 +65,8 @@ export default class Player{
     }
     update(input, deltaTime, enemies){
         this.attackAnimationTimer+=deltaTime;
+        this.attackCooldownTimer+=deltaTime;
+
         this.currentState.handleInput(input);
         // horizontal movement
         this.x += this.speed;
@@ -149,6 +153,9 @@ export default class Player{
     }
     playerAttacking(){
         return this.attackAnimationTimer < this.attackAnimationInterval;
+    }
+    playerAttackReady(){
+        return this.attackCooldownTimer > this.attackCooldownInterval;
     }
     intersectCircle(S, A, B, C, D){
         if(S.y >= D.y && S.y <= C.y){
