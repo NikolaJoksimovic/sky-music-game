@@ -37,7 +37,7 @@ export class Idle extends State{
         
         // AUDIO
         this.player.game.ingameAudio[soundStates.IDLE].value = true;
-        this.player.game.ingameAudio[soundStates.IDLE].sound.audio.playbackRate = 1.1;
+        this.player.game.ingameAudio[soundStates.IDLE].audio.playbackRate = 1.1;
     }
     handleInput(input){
         if(input.includes('ArrowRight')){
@@ -64,7 +64,7 @@ export class RunningRight extends State{
         this.player.speed = this.player.maxSpeed;
 
         // AUDIO
-        this.player.game.ingameAudio[soundStates.IDLE].sound.audio.playbackRate = 1.6;
+        this.player.game.ingameAudio[soundStates.IDLE].audio.playbackRate = 1.6;
         
     }
     handleInput(input){
@@ -92,7 +92,7 @@ export class RunningLeft extends State{
         this.player.speed = -this.player.maxSpeed;
         
         // AUDIO
-        this.player.game.ingameAudio[soundStates.IDLE].sound.audio.playbackRate = 1.5;
+        this.player.game.ingameAudio[soundStates.IDLE].audio.playbackRate = 1.5;
     }
     handleInput(input){
         if(input.includes('ArrowRight') && comesAfter('ArrowRight', 'ArrowLeft', input)){

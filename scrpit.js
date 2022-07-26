@@ -142,10 +142,10 @@ window.addEventListener('load', function(){
         }
         game.ingameAudio.forEach(element=>{
             if(element.value === true){
-                element.sound.loop();
+                element.loop();
             }
             else{
-                element.sound.stop();
+                element.stop();
             }
         });
     }

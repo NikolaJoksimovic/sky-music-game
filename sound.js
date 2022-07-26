@@ -1,8 +1,10 @@
 export default class Sound{
-    constructor(game, file_path){
+    constructor(game, file_path, soundState){
         this.game = game;
         this.file_path = file_path;
+        this.soundState = soundState;
         this.audio = new Audio(file_path);
+        this.value = true;
         this.audio.playbackRate = 1;
     }
 

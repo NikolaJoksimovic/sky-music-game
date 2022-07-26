@@ -20,12 +20,8 @@ export default class Game{
 
         // AUDIO
         this.ingameAudio = [];
-        this.player_walking04 = new Sound(this, './assets/audio/final_koraci04.wav');
         this.ingameAudio.push(
-            {
-                sound: this.player_walking04,
-                value: true
-            }
+            new Sound(this, './assets/audio/final_koraci04.wav', 'IDLE')
         );
         // CLASSES
         this.input = new InputHanderl(this);
