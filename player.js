@@ -67,6 +67,7 @@ export default class Player{
         this.attackCooldownTimer+=deltaTime;
 
         this.currentState.handleInput(input);
+        
         // horizontal movement
         this.x += this.speed;
         if(this.x < 0-this.width/3){this.x = 0-this.width/3};
@@ -79,7 +80,7 @@ export default class Player{
         }else{
             this.vy = 0;
         }
-        // console.log(this.y);
+
         // animation
         if(this.frameTimer >= this.frameInterval){
             if(this.frameX < this.maxFrames){
