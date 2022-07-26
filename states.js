@@ -12,6 +12,9 @@ const states = {
     ATTACKING:          9,
     JUMP_ATTACKING:     10
 }
+const soundStates = {
+    IDLE: 0,
+}
 
 class State{
     constructor(state){
@@ -33,6 +36,8 @@ export class Idle extends State{
         this.player.speed = 0;
         
         // AUDIO
+        this.player.game.ingameAudio[soundStates.IDLE].value = true;
+        this.player.game.ingameAudio[soundStates.IDLE].sound.audio.playbackRate = 1.1;
     }
     handleInput(input){
         if(input.includes('ArrowRight')){
@@ -57,6 +62,9 @@ export class RunningRight extends State{
         this.player.maxFrames = 9;
         this.player.frameY = 8;
         this.player.speed = this.player.maxSpeed;
+
+        // AUDIO
+        this.player.game.ingameAudio[soundStates.IDLE].sound.audio.playbackRate = 1.6;
         
     }
     handleInput(input){
@@ -82,6 +90,9 @@ export class RunningLeft extends State{
         this.player.maxFrames = 9;
         this.player.frameY = 8;
         this.player.speed = -this.player.maxSpeed;
+        
+        // AUDIO
+        this.player.game.ingameAudio[soundStates.IDLE].sound.audio.playbackRate = 1.5;
     }
     handleInput(input){
         if(input.includes('ArrowRight') && comesAfter('ArrowRight', 'ArrowLeft', input)){
@@ -110,7 +121,7 @@ export class Jumping extends State{
         this.player.vy = -30;
 
         // AUDIO
-        this.player.sound_walking04.stop();
+        this.player.game.ingameAudio[0].value = false;
     }
     handleInput(input){
         if(this.player.vy > this.player.gravity){
@@ -240,6 +251,9 @@ export class Attacking extends State{
         this.player.speed = -this.player.game.background.layer5Speed;
         this.player.attackAnimationTimer = 0;
         this.player.attackCooldownTimer = 0;
+
+        // AUDIO
+        this.player.game.ingameAudio[0].value = false;
     }
     handleInput(input){
         if(!this.player.playerAttacking()){
@@ -264,7 +278,7 @@ export class JumpAttacking extends State{
     }
     handleInput(input){
         if(!this.player.playerAttacking()){
-            this.player.setState(states.IDLE);
+            this.player.setState(states.FALLING);
         }
     }
 }

@@ -3,6 +3,7 @@ import Player from './player.js';
 import Enemy from './enemy.js'
 import Background from './background.js'
 import Menu from './menu.js';
+import Sound from './sound.js';
 
 export default class Game{
     constructor(width, height){
@@ -17,6 +18,16 @@ export default class Game{
         this.enemyCollisionEnabled = true;
         this.enableHitboxes = false;
 
+        // AUDIO
+        this.ingameAudio = [];
+        this.player_walking04 = new Sound(this, './assets/audio/final_koraci04.wav');
+        this.ingameAudio.push(
+            {
+                sound: this.player_walking04,
+                value: true
+            }
+        );
+        // CLASSES
         this.input = new InputHanderl(this);
         this.player = new Player(this);
         this.background = new Background(this);
@@ -30,7 +41,6 @@ export default class Game{
         
         this.gameObjects.push(this.background);
         this.gameObjects.push(this.player);
-        
     }
 
     update(deltaTime){

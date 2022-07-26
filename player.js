@@ -1,4 +1,3 @@
-import Sound from './sound.js';
 import {
     Idle,
     RunningRight, 
@@ -19,8 +18,6 @@ export default class Player{
         this.image = document.getElementById('player-img');
         
         // AUDIO
-
-        this.sound_walking04 = new Sound(this, './assets/audio/final_koraci04.wav');
 
         // the rest..
         this.states = [

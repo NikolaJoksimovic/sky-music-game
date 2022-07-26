@@ -3,8 +3,7 @@ export default class Sound{
         this.game = game;
         this.file_path = file_path;
         this.audio = new Audio(file_path);
-        this.endLoop = false;
-        this.gamePaused = this.game.gamePaused;
+        this.audio.playbackRate = 1;
     }
 
     play(){
@@ -17,10 +16,8 @@ export default class Sound{
     loop(){
         this.audio.play();
         this.audio.addEventListener('ended', e=>{
-        if(!this.game.gamePaused){
-                this.audio.currentTime = 0;
+            this.audio.currentTime = 0;
             this.audio.play();
-            }
         })
     }
 }
