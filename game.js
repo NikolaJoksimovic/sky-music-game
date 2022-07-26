@@ -11,6 +11,10 @@ export default class Game{
         this.gameObjects = [];
         this.enemies = [];
         this.score = 0;
+        this.gamePaused = true;
+        this.gameOver = false;
+        this.enemyCollisionEnabled = true;
+        this.enableHitboxes = false;
 
         this.input = new InputHanderl(this);
         this.player = new Player(this);
@@ -18,6 +22,7 @@ export default class Game{
         this.menu = new Menu(this);
         
         
+        // enemies generator
         this.enemyInterval = 500;
         this.enemyTimer = 0;
         this.randomEnemyInterval = Math.random()*5000;

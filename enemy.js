@@ -53,7 +53,7 @@ export default class Enemy{
         this.collisionCircleY = this.y+this.height/2-10;
         this.collisionCircleR = this.width/2.5;
         // hitboxes
-        if(this.game.player.enableHitboxes){
+        if(this.game.enableHitboxes){
             ctx.strokeStyle = 'white';
             ctx.beginPath();
             ctx.arc(this.collisionCircleX, this.collisionCircleY, this.collisionCircleR, 0, 2*Math.PI);

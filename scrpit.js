@@ -17,7 +17,6 @@ window.addEventListener('load', function(){
     hitboxesEl = this.document.querySelector('#options-hitboxes');
     
     let lastTime = 0;
-    let gamePaused = true;
     let game = new Game();
     let enableCollision = true;
     let enableHitboxes = false;
@@ -28,17 +27,17 @@ window.addEventListener('load', function(){
     audio_koraci04.volume = 1;
     audio_koraci04.playbackRate = 1.1;
     audio_koraci04.addEventListener('ended', e=>{
-        if(!gamePaused && !game.player.gameOver){
+        if(!game.gamePaused && !game.gameOver){
             audio_koraci04.play();
         }
     })
-
+    
+    // audio_koraci04.play(); 
     // AUDIO //////////////////////////////////////////////////////////////
     canvasEl.width = 1280; 
     canvasEl.height = 720;
     
     optionsBtnEl.addEventListener('click', e=>{
-        // console.log("hey")
         menuEl.classList.add('menu-hide');
         optionsContainerEl.classList.add('show-options-container');
         backBtnEl.classList.add('back-btn-show');
@@ -49,7 +48,6 @@ window.addEventListener('load', function(){
         backBtnEl.classList.add('back-btn-show');
     });
     backBtnEl.addEventListener('click', e=>{
-        // console.log("cllick")
         menuEl.classList.remove('menu-hide');
         if(optionsContainerEl.classList.contains('show-options-container')){
             optionsContainerEl.classList.remove('show-options-container');
@@ -58,8 +56,7 @@ window.addEventListener('load', function(){
         }
         backBtnEl.classList.remove('back-btn-show');
     });
-    
-
+    // collsion buton
     enemyCollisionBtnEl.addEventListener('click', e=>{
         if(e.target.value === 'on'){
             enemyCollisionBtnEl.innerHTML = `enemy collision: off`
@@ -71,6 +68,7 @@ window.addEventListener('load', function(){
             enableCollision = true;
         }
     });
+    // hitboxes buton
     hitboxesEl.addEventListener('click', e=>{
         if(e.target.value === 'on'){
             hitboxesEl.innerHTML = `hitboxes: off`
@@ -87,13 +85,13 @@ window.addEventListener('load', function(){
     // ************************************************
 
     playBtnEl.addEventListener('click', e=>{
-        audio_koraci04.play();        
-        gamePaused = false;
         mainContainerEl.classList.add('hide-main-container');
         game = new Game(canvasEl.width, canvasEl.height);
-        game.player.gameOver = false;
-        game.player.enemyCollisionEnabled = enableCollision;
-        game.player.enableHitboxes = enableHitboxes;
+        game.gamePaused = false;
+        game.gameOver = false;
+        game.enemyCollisionEnabled = enableCollision;
+        game.enableHitboxes = enableHitboxes;
+
         let menu_btn = { 
             x: game.menu.x,
             y: game.menu.y,
@@ -112,7 +110,7 @@ window.addEventListener('load', function(){
             let mousePos = getMousePos(canvasEl, e);
             if(isInside(mousePos, menu_btn)){
                 mainContainerEl.classList.remove('hide-main-container');
-                gamePaused = true;
+                game.gamePaused = true;
             }
         });
 
@@ -129,7 +127,7 @@ window.addEventListener('load', function(){
         game.update(deltaTime);
         game.draw(ctx);
 
-        if(!game.player.gameOver && !gamePaused){
+        if(!game.player.gameOver && !game.gamePaused){
             requestAnimationFrame(animate);
         }else if(game.player.gameOver){
             mainContainerEl.classList.toggle('hide-main-container');

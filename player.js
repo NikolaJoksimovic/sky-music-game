@@ -16,7 +16,19 @@ export default class Player{
     constructor(game){
         this.game = game;
         this.image = document.getElementById('player-img');
-        
+        this.states = [
+            new Idle(this),
+            new RunningRight(this),
+            new RunningLeft(this),
+            new Jumping(this),
+            new Falling(this),
+            new JumpingRight(this),
+            new JumpingLeft(this),
+            new FallingRight(this),
+            new FallingLeft(this),
+            new Attacking(this),
+            new JumpAttacking(this)
+        ];
         // positioning and dimensions
         this.gameWidth = game.width;
         this.gameHeight = game.height;
@@ -38,30 +50,12 @@ export default class Player{
         this.attackCooldownTimer = 690;
 
         //movement
-        this.states = [
-            new Idle(this),
-            new RunningRight(this),
-            new RunningLeft(this),
-            new Jumping(this),
-            new Falling(this),
-            new JumpingRight(this),
-            new JumpingLeft(this),
-            new FallingRight(this),
-            new FallingLeft(this),
-            new Attacking(this),
-            new JumpAttacking(this)
-        ];
         this.currentState = this.states[0];
         this.currentState.enter();
         this.speed = 0;
         this.maxSpeed = 9;
         this.vy = 0;
         this.gravity = 0.98;
-
-        // other
-        this.gameOver = false;
-        this.enemyCollisionEnabled = true;
-        this.enableHitboxes = false;
     }
     update(input, deltaTime, enemies){
         this.attackAnimationTimer+=deltaTime;
@@ -93,7 +87,7 @@ export default class Player{
             this.frameTimer+=deltaTime;
         }
         //Enemy colision
-        if(this.enemyCollisionEnabled){
+        if(this.game.enemyCollisionEnabled){
             this.enemyCollision(enemies);
         }
     }
@@ -104,7 +98,7 @@ export default class Player{
         this.collisionCircleY = this.y+this.height/2;
         this.collisionCircleR = this.width/3;
         //hitboxes
-        if(this.enableHitboxes){
+        if(this.game.enableHitboxes){
             ctx.strokeStyle = 'hsl(6, 93%, 71%)';
             ctx.strokeRect(this.x+this.width/3, this.y+20, this.width/3, this.height-20);
             ctx.beginPath();
@@ -139,7 +133,7 @@ export default class Player{
                 }
                 if(this.intersectCircle(enemyCircle, playerRectangle.A, playerRectangle.B,playerRectangle.C, playerRectangle.D))
                 {
-                    this.gameOver = true;
+                    this.game.gameOver = true;
                 }
             }
         });
