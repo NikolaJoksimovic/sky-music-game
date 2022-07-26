@@ -1,3 +1,4 @@
+import Sound from './sound.js';
 import {
     Idle,
     RunningRight, 
@@ -16,6 +17,12 @@ export default class Player{
     constructor(game){
         this.game = game;
         this.image = document.getElementById('player-img');
+        
+        // AUDIO
+
+        this.sound_walking04 = new Sound(this, './assets/audio/final_koraci04.wav');
+
+        // the rest..
         this.states = [
             new Idle(this),
             new RunningRight(this),
@@ -56,6 +63,7 @@ export default class Player{
         this.maxSpeed = 9;
         this.vy = 0;
         this.gravity = 0.98;
+
     }
     update(input, deltaTime, enemies){
         this.attackAnimationTimer+=deltaTime;

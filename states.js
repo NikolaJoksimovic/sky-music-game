@@ -1,3 +1,4 @@
+import Sound from "./sound.js";
 const states = {
     IDLE:               0,
     RUNNING_RIGHT:      1,
@@ -30,6 +31,8 @@ export class Idle extends State{
         this.player.frameY = 8;
         this.player.frameX = 0;
         this.player.speed = 0;
+        
+        // AUDIO
     }
     handleInput(input){
         if(input.includes('ArrowRight')){
@@ -54,6 +57,7 @@ export class RunningRight extends State{
         this.player.maxFrames = 9;
         this.player.frameY = 8;
         this.player.speed = this.player.maxSpeed;
+        
     }
     handleInput(input){
         if(input.includes('ArrowLeft') && comesAfter('ArrowLeft', 'ArrowRight', input)){
@@ -104,6 +108,9 @@ export class Jumping extends State{
         this.player.frameX = 0;
         this.player.frameY = 7;
         this.player.vy = -30;
+
+        // AUDIO
+        this.player.sound_walking04.stop();
     }
     handleInput(input){
         if(this.player.vy > this.player.gravity){

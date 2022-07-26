@@ -11,6 +11,7 @@ export default class Game{
         this.gameObjects = [];
         this.enemies = [];
         this.score = 0;
+
         this.gamePaused = true;
         this.gameOver = false;
         this.enemyCollisionEnabled = true;

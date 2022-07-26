@@ -32,7 +32,6 @@ window.addEventListener('load', function(){
         }
     })
     
-    // audio_koraci04.play(); 
     // AUDIO //////////////////////////////////////////////////////////////
     canvasEl.width = 1280; 
     canvasEl.height = 720;
@@ -127,9 +126,9 @@ window.addEventListener('load', function(){
         game.update(deltaTime);
         game.draw(ctx);
 
-        if(!game.player.gameOver && !game.gamePaused){
+        if(!game.gameOver && !game.gamePaused){
             requestAnimationFrame(animate);
-        }else if(game.player.gameOver){
+        }else if(game.gameOver){
             mainContainerEl.classList.toggle('hide-main-container');
         }
     }
