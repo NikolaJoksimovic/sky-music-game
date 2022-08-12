@@ -51,7 +51,7 @@ export default class Game{
         }
         this.enemies = this.enemies.filter(obj => !obj.markedForDeletion && !obj.dead);
         this.gameObjects = this.gameObjects.filter(obj => !obj.markedForDeletion && !obj.dead);
-        this.menu.update(deltaTime);
+        // console.log(this.input.keys);
         this.gameObjects.forEach(obj => {
             obj.update(this.input.keys, deltaTime, this.enemies);
         });
