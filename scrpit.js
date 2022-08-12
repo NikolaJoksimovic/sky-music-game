@@ -93,29 +93,29 @@ window.addEventListener('load', function(){
         game.ingameAudio.forEach(element=>{
             element.value = true;
         });
-        let menu_btn = { 
-            x: game.menu.x,
-            y: game.menu.y,
-            width: game.menu.width,
-            height: game.menu.height
-        }
-        canvasEl.addEventListener('mousemove', e=>{
-            let mousePos = getMousePos(canvasEl, e);
-            if(isInside(mousePos, menu_btn)){
-                canvasEl.style.cursor = 'pointer';
-            }else{
-                canvasEl.style.cursor = 'default';   
-            }
-        })
-        canvasEl.addEventListener('click', e=>{
-            let mousePos = getMousePos(canvasEl, e);
-            if(isInside(mousePos, menu_btn)){
-                mainContainerEl.classList.remove('hide-main-container');
-                game.gamePaused = true;
-            }
-        });
+        // let menu_btn = { 
+        //     x: game.menu.x,
+        //     y: game.menu.y,
+        //     width: game.menu.width,
+        //     height: game.menu.height
+        // }
+        // canvasEl.addEventListener('mousemove', e=>{
+        //     let mousePos = getMousePos(canvasEl, e);
+        //     if(isInside(mousePos, menu_btn)){
+        //         canvasEl.style.cursor = 'pointer';
+        //     }else{
+        //         canvasEl.style.cursor = 'default';   
+        //     }
+        // })
+        // canvasEl.addEventListener('click', e=>{
+        //     let mousePos = getMousePos(canvasEl, e);
+        //     if(isInside(mousePos, menu_btn)){
+        //         mainContainerEl.classList.remove('hide-main-container');
+        //         game.gamePaused = true;
+        //     }
+        // });
 
-        animate(0);
+        this.requestAnimationFrame(animate);
     });
 
     // ANIMATE FUNCTION
@@ -151,15 +151,15 @@ window.addEventListener('load', function(){
     }
     
     //functions for clicking inside canvas..
-    function getMousePos(canvas, e) {
-        let rect = canvas.getBoundingClientRect();
-        return {
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top
-        };
-    }
-    function isInside(pos, rect){
-        return pos.x > rect.x && pos.x < rect.x+rect.width && pos.y < rect.y+rect.height && pos.y > rect.y
-    }
+    // function getMousePos(canvas, e) {
+    //     let rect = canvas.getBoundingClientRect();
+    //     return {
+    //         x: e.clientX - rect.left,
+    //         y: e.clientY - rect.top
+    //     };
+    // }
+    // function isInside(pos, rect){
+    //     return pos.x > rect.x && pos.x < rect.x+rect.width && pos.y < rect.y+rect.height && pos.y > rect.y
+    // }
     // ////////////////////////////////////
 }); 

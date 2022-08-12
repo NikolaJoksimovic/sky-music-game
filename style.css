@@ -89,6 +89,14 @@ button:hover{
 .menu-right{
     background: url('./assets/menu-background/menu-backgorund-right.png') center/contain no-repeat;
 }
+@media screen and (max-width: 530px) {
+    .menu{
+        min-width: 290px;
+    }
+    .menu-left, .menu-right{
+        display: none;
+    }
+}
 .title{
     position: absolute;
     left: 50%;
