@@ -2,7 +2,7 @@ export default class Layer{
     constructor(layerImg, layerSpeed, layerWidht){
         this.layerImg = layerImg;
         this.layerSpeedNormal = layerSpeed;
-        this.layerSpeedInc = layerSpeed*2;
+        this.layerSpeedInc = layerSpeed*1.5;
         this.layerSpeed = layerSpeed;
 
         this.x = 0;

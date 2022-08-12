@@ -3,6 +3,7 @@
     --clr-black05: hsla(0, 0%, 0%, 0.5);
     --clr-black08: hsla(0, 0%, 0%, 0.8);
     --clr-black095: hsla(0, 0%, 0%, 0.95);
+    --clr-black098: hsla(0, 0%, 0%, 0.98);
     --clr-blood-red: hsl(0, 84%, 17%);
     --clr-button-shadow: hsl(0, 54%, 15%);
     --clr-white: rgba(255, 255, 255);
@@ -88,6 +89,14 @@ button:hover{
 .menu-right{
     background: url('./assets/menu-background/menu-backgorund-right.png') center/contain no-repeat;
 }
+.title{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-150%);
+    min-width: 350px;
+    font-size: 1.2rem;
+    color: var(--clr-black098);
+}
 .menu-hide{
     display: none;
 }
@@ -125,7 +134,7 @@ button:hover{
     z-index: -10;
 }
 .options-container, .controls-container{
-    background-color: var(--clr-black095);
+    background-color: var(--clr-black098);
     position: absolute;
     justify-content: space-around;
     align-items: center;
