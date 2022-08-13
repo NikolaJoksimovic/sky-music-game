@@ -119,11 +119,18 @@ export default class Player{
                 const dy = enemy.collisionCircleY - this.collisionCircleY;
                 const dr = dx*dx + dy*dy;
 
-                // console.log(this.collisionCircleR, enemy.collisionCircleR);
-
                 if(Math.sqrt(dr) < this.collisionCircleR + enemy.collisionCircleR){
-                    enemy.dead = true;
-                    this.game.score++;
+                    if(enemy.isBoss){
+                        enemy.health--;
+                        if(enemy.health<=0){
+                            enemy.dead = true;
+                            this.game.enemyBossLive = false;
+                            this.game.score++;
+                        }
+                    }else{
+                        enemy.dead = true;
+                        this.game.score++;
+                    }
                 }
             }else{
                 let enemyCircle = {

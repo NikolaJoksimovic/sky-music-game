@@ -8,9 +8,13 @@ export default class Enemy{
         this.image = document.getElementById('enemy-ghost-img');
         this.frameX = 0;
         this.frameY = 0;
-        this.x = game.width - this.width;
-        this.y = game.height/2 + this.height;
-        
+        if(this.game.enemyBossLive){
+            this.x = game.enemyBoss.mouthPos.x;
+            this.y = game.enemyBoss.mouthPos.y;
+        }else{
+            this.x = game.width - this.width;
+            this.y = game.height/2 + this.height;
+        }
         // animation
         this.speed = 10;
         this.maxFrame = 10;

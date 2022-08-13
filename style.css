@@ -63,7 +63,9 @@ button:hover{
 .parallaximg{
     display: none;
 }
-
+#enemy-boss-img{
+    display: none;
+}
 /* MAIN MENU */
 .menu{
     display: flex;

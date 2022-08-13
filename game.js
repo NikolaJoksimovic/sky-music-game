@@ -2,8 +2,9 @@ import InputHanderl from './input_handler.js';
 import Player from './player.js';
 import Enemy from './enemy.js'
 import Background from './background.js'
-import Menu from './menu.js';
 import Sound from './sound.js';
+import EnemyBoss from './enemyBoss.js';
+import Menu from './menu.js';
 
 export default class Game{
     constructor(width, height){
@@ -27,6 +28,7 @@ export default class Game{
         this.input = new InputHanderl(this);
         this.player = new Player(this);
         this.background = new Background(this);
+        this.enemyBoss = new EnemyBoss(this);
         // this.menu = new Menu(this);
         
         
@@ -34,7 +36,9 @@ export default class Game{
         this.enemyInterval = 500;
         this.enemyTimer = 0;
         this.randomEnemyInterval = Math.random()*5000;
+        this.enemyBossLive = false;
         
+        // game objects
         this.gameObjects.push(this.background);
         this.gameObjects.push(this.player);
     }
@@ -49,9 +53,13 @@ export default class Game{
         }else{
             this.enemyTimer += deltaTime;
         }
+        if(this.score === 1 && !this.enemyBossLive){
+            this.enemies.push(this.enemyBoss);
+            this.gameObjects.push(this.enemyBoss);
+            this.enemyBossLive = true;
+        }
         this.enemies = this.enemies.filter(obj => !obj.markedForDeletion && !obj.dead);
         this.gameObjects = this.gameObjects.filter(obj => !obj.markedForDeletion && !obj.dead);
-        // console.log(this.input.keys);
         if(this.input.keys.includes('Escape') && !this.gamePaused){
             this.gameOver = true;
         }
@@ -65,7 +73,6 @@ export default class Game{
             obj.draw(ctx);
         })
         this.displayTextStatus(ctx);
-        // this.menu.draw(ctx);
     }
 
     displayTextStatus(ctx){
@@ -75,14 +82,5 @@ export default class Game{
         ctx.fillText('Kills: ' + this.score + '/10', 20, 50);
         ctx.fillStyle = 'hsl(0, 84%, 17%)';
         ctx.fillText('Kills: ' + this.score + '/10', 22, 52);
-        // if(this.player.gameOver){
-        //     ctx.font = '70px Halvetica';
-        //     ctx.textAligh = 'center';
-        //     ctx.fillStyle = 'black';
-        //     ctx.fillText('GAME OVER', this.width/2 - maxTextWidht/2, this.height/2, maxTextWidht);
-        //     ctx.textAligh = 'center';
-        //     ctx.fillStyle = 'hsl(0, 84%, 17%)';
-        //     ctx.fillText('GAME OVER', this.width/2 + 2 -maxTextWidht/2, this.height/2 + 2, maxTextWidht);
-        // }
     }
 }
