@@ -133,21 +133,23 @@ export default class Player{
                     }
                 }
             }else{
-                let enemyCircle = {
-                    x: enemy.collisionCircleX,
-                    y: enemy.collisionCircleY,
-                    r: enemy.collisionCircleR
-                }
-                let playerRectangle = {
-                    A: {x: this.x+this.width/3, y: this.y+20},
-                    B: {x: this.x+this.width/3, y: this.y+20 + this.height-20},
-                    C: {x: this.x+this.width/3 + this.width/3, y: this.y+20 + this.height-20},
-                    D: {x: this.x+this.width/3 + this.width/3, y: this.y+20},
-                }
-                if(this.intersectCircle(enemyCircle, playerRectangle.A, playerRectangle.B,playerRectangle.C, playerRectangle.D))
-                {
+                if(!this.game.godModeOn){
+                    let enemyCircle = {
+                        x: enemy.collisionCircleX,
+                        y: enemy.collisionCircleY,
+                        r: enemy.collisionCircleR
+                    }
+                    let playerRectangle = {
+                        A: {x: this.x+this.width/3, y: this.y+20},
+                        B: {x: this.x+this.width/3, y: this.y+20 + this.height-20},
+                        C: {x: this.x+this.width/3 + this.width/3, y: this.y+20 + this.height-20},
+                        D: {x: this.x+this.width/3 + this.width/3, y: this.y+20},
+                    }
+                    if(this.intersectCircle(enemyCircle, playerRectangle.A, playerRectangle.B,playerRectangle.C, playerRectangle.D))
+                    {
                     this.game.gameOver = true;
                 }
+            }   
             }
         });
     }

@@ -32,12 +32,13 @@ export default class EnemyBoss{
     update(input, deltaTime, enemies){
         
         this.x -= this.entrySpeed;
-        this.mouthPos.x = this.x;
+        this.mouthPos.x = this.x+30;
         if(this.x < this.game.width - this.width){
             this.entrySpeed = 0;
         }
-
+        
         this.y += Math.cos(this.angle);
+        this.mouthPos.y = this.y + this.height/2-30;
         this.angle += this.angleSpeed;
     }
     draw(ctx){

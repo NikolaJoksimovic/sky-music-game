@@ -16,11 +16,11 @@ export default class Background{
         this.layer3Speed = 2;
         this.layer4Speed = 3;
         this.layer5Speed = 5;
-        // this.layer1Speed = 1;
-        // this.layer2Speed = 1;
-        // this.layer3Speed = 1;
-        // this.layer4Speed = 1;
-        // this.layer5Speed = 1;
+        // this.layer1Speed = 0;
+        // this.layer2Speed = 0;
+        // this.layer3Speed = 0;
+        // this.layer4Speed = 0;
+        // this.layer5Speed = 0;
         this.layers.push(new Layer(this.layer1, this.layer1Speed));
         this.layers.push(new Layer(this.layer2, this.layer2Speed));
         this.layers.push(new Layer(this.layer3, this.layer3Speed));

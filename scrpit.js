@@ -14,12 +14,14 @@ window.addEventListener('load', function(){
     backBtnEl = this.document.querySelector('.back-btn'),
     menuEl = this.document.querySelector('.menu'),
     enemyCollisionBtnEl = this.document.querySelector('#options-enemy-collision'),
-    hitboxesEl = this.document.querySelector('#options-hitboxes');
+    hitboxesEl = this.document.querySelector('#options-hitboxes'),
+    godmodeEl = this.document.querySelector('#options-godmode');
     
     let lastTime = 0;
     let game = new Game();
     let enableCollision = true;
     let enableHitboxes = false;
+    let enableGodMode = false;
 
     // AUIDO /////////////////////////////////////////////////////////////
     let audio_koraci04 = new Audio();
@@ -72,9 +74,21 @@ window.addEventListener('load', function(){
         if(e.target.value === 'on'){
             hitboxesEl.innerHTML = `hitboxes: off`
             e.target.value = 'off';
-            enableHitboxes = false;
+            enableGodMode = false;
         }else{
             hitboxesEl.innerHTML = `hitboxes: on`
+            e.target.value = 'on';
+            enableGodMode = true;
+        }
+    });
+    
+    godmodeEl.addEventListener('click', e=>{
+        if(e.target.value === 'on'){
+            godmodeEl.innerHTML = `god mode: off`
+            e.target.value = 'off';
+            enableHitboxes = false;
+        }else{
+            godmodeEl.innerHTML = `god mode: on`
             e.target.value = 'on';
             enableHitboxes = true;
         }
@@ -90,6 +104,7 @@ window.addEventListener('load', function(){
         game.gameOver = false;
         game.enemyCollisionEnabled = enableCollision;
         game.enableHitboxes = enableHitboxes;
+        game.godModeOn = enableGodMode;
         game.ingameAudio.forEach(element=>{
             element.value = true;
         });

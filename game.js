@@ -14,10 +14,12 @@ export default class Game{
         this.enemies = [];
         this.score = 0;
 
+        // misc
         this.gamePaused = true;
         this.gameOver = false;
         this.enemyCollisionEnabled = true;
         this.enableHitboxes = false;
+        this.godModeOn = false;
 
         // AUDIO
         this.ingameAudio = [];
