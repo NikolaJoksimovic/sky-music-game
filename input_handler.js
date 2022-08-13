@@ -13,7 +13,6 @@ export default class InputHanderl{
                 this.keys.indexOf(e.key) === -1){
                     this.keys.push(e.key);
                 }
-                // console.log(e.key);
         });
         window.addEventListener('keyup', e =>{
             if((e.key === 'ArrowDown' ||

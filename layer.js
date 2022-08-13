@@ -9,7 +9,6 @@ export default class Layer{
         this.y = 0;
         this.widht = 1920;
         this.height = 720;
-        // this.gameSpeed = 5;
 
     }
 
@@ -29,7 +28,5 @@ export default class Layer{
     draw(ctx){
         ctx.drawImage(this.layerImg, this.x, this.y, this.widht, this.height);
         ctx.drawImage(this.layerImg, this.x + this.widht - this.layerSpeed, this.y, this.widht, this.height);
-        // experimental
-        // ctx.drawImage(this.layerImg, this.x + this.widht , this.y, this.widht, this.height);
         }
 }

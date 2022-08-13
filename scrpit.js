@@ -108,27 +108,6 @@ window.addEventListener('load', function(){
         game.ingameAudio.forEach(element=>{
             element.value = true;
         });
-        // let menu_btn = { 
-        //     x: game.menu.x,
-        //     y: game.menu.y,
-        //     width: game.menu.width,
-        //     height: game.menu.height
-        // }
-        // canvasEl.addEventListener('mousemove', e=>{
-        //     let mousePos = getMousePos(canvasEl, e);
-        //     if(isInside(mousePos, menu_btn)){
-        //         canvasEl.style.cursor = 'pointer';
-        //     }else{
-        //         canvasEl.style.cursor = 'default';   
-        //     }
-        // })
-        // canvasEl.addEventListener('click', e=>{
-        //     let mousePos = getMousePos(canvasEl, e);
-        //     if(isInside(mousePos, menu_btn)){
-        //         mainContainerEl.classList.remove('hide-main-container');
-        //         game.gamePaused = true;
-        //     }
-        // });
 
         this.requestAnimationFrame(animate);
     });
