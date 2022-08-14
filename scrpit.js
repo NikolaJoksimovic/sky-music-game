@@ -74,23 +74,23 @@ window.addEventListener('load', function(){
         if(e.target.value === 'on'){
             hitboxesEl.innerHTML = `hitboxes: off`
             e.target.value = 'off';
-            enableGodMode = false;
+            enableHitboxes = false;
         }else{
             hitboxesEl.innerHTML = `hitboxes: on`
             e.target.value = 'on';
-            enableGodMode = true;
+            enableHitboxes = true;
         }
     });
-    
+    // godmode button
     godmodeEl.addEventListener('click', e=>{
         if(e.target.value === 'on'){
             godmodeEl.innerHTML = `god mode: off`
             e.target.value = 'off';
-            enableHitboxes = false;
+            enableGodMode = false;
         }else{
             godmodeEl.innerHTML = `god mode: on`
             e.target.value = 'on';
-            enableHitboxes = true;
+            enableGodMode = true;
         }
     });
 
