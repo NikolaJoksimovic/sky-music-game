@@ -2,7 +2,6 @@ import Game from './game.js';
 import Sound from './sound.js';
 
 window.addEventListener('load', function(){
-    this.window.alert('Allow audio on this webpage?');
 
     const canvasEl = this.document.getElementById('canvas-main'),
     ctx = canvasEl.getContext('2d'),
@@ -16,7 +15,8 @@ window.addEventListener('load', function(){
     menuEl = this.document.querySelector('.menu'),
     enemyCollisionBtnEl = this.document.querySelector('#options-enemy-collision'),
     hitboxesEl = this.document.querySelector('#options-hitboxes'),
-    godmodeEl = this.document.querySelector('#options-godmode');
+    godmodeEl = this.document.querySelector('#options-godmode'),
+    soundOnBtnEl = this.document.querySelector('.mute-btn');
     
     let lastTime = 0;
     let game = new Game();
@@ -27,7 +27,9 @@ window.addEventListener('load', function(){
     // AUIDO /////////////////////////////////////////////////////////////
     const soundMenuTheme = new Sound(this, './assets/audio/menu-theme-song.wav', 'MENU');
     soundMenuTheme.audio.volume = 1;
-    soundMenuTheme.loop();
+    soundOnBtnEl.addEventListener('click', ()=>{
+        soundMenuTheme.loop();
+    });
     // AUDIO //////////////////////////////////////////////////////////////
 
     canvasEl.width = 1280; 
