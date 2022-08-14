@@ -2,7 +2,7 @@ import Game from './game.js';
 import Sound from './sound.js';
 
 window.addEventListener('load', function(){
-
+    this.window.alert('Allow audio on this webpage?');
 
     const canvasEl = this.document.getElementById('canvas-main'),
     ctx = canvasEl.getContext('2d'),
