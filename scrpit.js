@@ -29,6 +29,7 @@ window.addEventListener('load', function(){
     soundMenuTheme.audio.volume = 1;
     soundOnBtnEl.addEventListener('click', ()=>{
         soundMenuTheme.loop();
+        soundOnBtnEl.classList.add('mute-btn-hide');
     });
     // AUDIO //////////////////////////////////////////////////////////////
 
