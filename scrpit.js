@@ -1,4 +1,5 @@
 import Game from './game.js';
+import Sound from './sound.js';
 
 window.addEventListener('load', function(){
 
@@ -24,17 +25,11 @@ window.addEventListener('load', function(){
     let enableGodMode = false;
 
     // AUIDO /////////////////////////////////////////////////////////////
-    let audio_koraci04 = new Audio();
-    audio_koraci04.src = './assets/audio/final_koraci04.wav';
-    audio_koraci04.volume = 1;
-    audio_koraci04.playbackRate = 1.1;
-    audio_koraci04.addEventListener('ended', e=>{
-        if(!game.gamePaused && !game.gameOver){
-            audio_koraci04.play();
-        }
-    })
-    
+    const soundMenuTheme = new Sound(this, './assets/audio/menu-theme-song.wav', 'MENU');
+    soundMenuTheme.audio.volume = 1;
+    soundMenuTheme.loop();
     // AUDIO //////////////////////////////////////////////////////////////
+
     canvasEl.width = 1280; 
     canvasEl.height = 720;
     
@@ -124,14 +119,18 @@ window.addEventListener('load', function(){
         
         if(!game.gameOver && !game.gamePaused){
             requestAnimationFrame(animate);
+            soundMenuTheme.stop();
         }else if(game.gameOver){
             mainContainerEl.classList.toggle('hide-main-container');
+            soundMenuTheme.loop();
         }
 
         // AUDIO
         if(game.gameOver || game.gamePaused){
             game.ingameAudio.forEach(element=>{
-                element.value = false;
+                if(!(element.soundState === 'MENU')){
+                    element.value = false;
+                }
             });
         }
         game.ingameAudio.forEach(element=>{

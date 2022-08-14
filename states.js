@@ -14,6 +14,7 @@ const states = {
 }
 const soundStates = {
     IDLE: 0,
+    MENU: 1,
 }
 
 class State{

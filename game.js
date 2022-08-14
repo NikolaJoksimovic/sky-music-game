@@ -22,10 +22,11 @@ export default class Game{
         this.godModeOn = false;
 
         // AUDIO
-        this.ingameAudio = [];
-        this.ingameAudio.push(
-            new Sound(this, './assets/audio/final_koraci04.wav', 'IDLE')
-        );
+        this.ingameAudio = this.addSounds();
+        // this.ingameAudio.push(
+        //     new Sound(this, './assets/audio/final_koraci04.wav', 'IDLE')
+        // );
+        // this.ingameAudio.push(new Sound(this, './assets/audio/menu-theme-song.mp3', 'MENU'));
         // CLASSES
         this.input = new InputHanderl(this);
         this.player = new Player(this);
@@ -84,5 +85,15 @@ export default class Game{
         ctx.fillText('Kills: ' + this.score + '/10', 20, 50);
         ctx.fillStyle = 'hsl(0, 84%, 17%)';
         ctx.fillText('Kills: ' + this.score + '/10', 22, 52);
+    }
+    addSounds(){
+        let soundArray = [];
+        const soundSteps = new Sound(this, './assets/audio/final_koraci04.wav', 'IDLE');
+        soundArray.push(soundSteps);
+        // const soundMenuTheme = new Sound(this, './assets/audio/menu-theme-song.mp3', 'MENU');
+        // soundMenuTheme.audio.volume = 0.1;
+        // soundArray.push(soundMenuTheme);
+        
+        return soundArray;
     }
 }
