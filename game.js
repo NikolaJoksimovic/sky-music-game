@@ -90,9 +90,10 @@ export default class Game{
         let soundArray = [];
         const soundSteps = new Sound(this, './assets/audio/final_koraci04.wav', 'IDLE');
         soundArray.push(soundSteps);
-        // const soundMenuTheme = new Sound(this, './assets/audio/menu-theme-song.mp3', 'MENU');
-        // soundMenuTheme.audio.volume = 0.1;
-        // soundArray.push(soundMenuTheme);
+        const OST_theme = new Sound(this, "./assets/audio/OST_06.wav");
+        OST_theme.audio.volume = 0.3;
+        soundArray.push(OST_theme);
+        
         
         return soundArray;
     }
