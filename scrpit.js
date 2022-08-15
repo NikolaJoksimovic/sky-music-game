@@ -16,7 +16,7 @@ window.addEventListener('load', function(){
     enemyCollisionBtnEl = this.document.querySelector('#options-enemy-collision'),
     hitboxesEl = this.document.querySelector('#options-hitboxes'),
     godmodeEl = this.document.querySelector('#options-godmode'),
-    soundOnBtnEl = this.document.querySelector('.mute-btn');
+    soundOnBtnEl = this.document.querySelector('#mute-btn');
     
     let lastTime = 0;
     let game = new Game();
@@ -24,28 +24,22 @@ window.addEventListener('load', function(){
     let enableHitboxes = false;
     let enableGodMode = false;
 
-    // AUIDO /////////////////////////////////////////////////////////////
-    const soundMenuTheme = new Sound(this, './assets/audio/main_menu_tematska_pesma_01.wav', 'MENU');
-    soundMenuTheme.audio.volume = 0.6;
-    soundOnBtnEl.addEventListener('click', ()=>{
-        soundMenuTheme.loop();
-        soundOnBtnEl.classList.add('mute-btn-hide');
-    });
-    // AUDIO //////////////////////////////////////////////////////////////
-
     canvasEl.width = 1280; 
     canvasEl.height = 720;
     
+    // options button
     optionsBtnEl.addEventListener('click', e=>{
         menuEl.classList.add('menu-hide');
         optionsContainerEl.classList.add('show-options-container');
         backBtnEl.classList.add('back-btn-show');
     });
+    // controls button
     controlsBtnEl.addEventListener('click', e=>{
         menuEl.classList.add('menu-hide');
         controlsContainerEl.classList.add('show-controls-container');
         backBtnEl.classList.add('back-btn-show');
     });
+    // go back button
     backBtnEl.addEventListener('click', e=>{
         menuEl.classList.remove('menu-hide');
         if(optionsContainerEl.classList.contains('show-options-container')){
@@ -55,7 +49,7 @@ window.addEventListener('load', function(){
         }
         backBtnEl.classList.remove('back-btn-show');
     });
-    // collsion buton
+    // collsion button
     enemyCollisionBtnEl.addEventListener('click', e=>{
         if(e.target.value === 'on'){
             enemyCollisionBtnEl.innerHTML = `enemy collision: off`
@@ -67,7 +61,7 @@ window.addEventListener('load', function(){
             enableCollision = true;
         }
     });
-    // hitboxes buton
+    // hitboxes button
     hitboxesEl.addEventListener('click', e=>{
         if(e.target.value === 'on'){
             hitboxesEl.innerHTML = `hitboxes: off`
@@ -125,15 +119,15 @@ window.addEventListener('load', function(){
             soundMenuTheme.stop();
         }else if(game.gameOver){
             mainContainerEl.classList.toggle('hide-main-container');
-            soundMenuTheme.loop();
+            if(soundOnBtnEl.classList.contains('mute-btn-play')){
+                soundMenuTheme.loop();
+            }
         }
 
         // AUDIO
         if(game.gameOver || game.gamePaused){
             game.ingameAudio.forEach(element=>{
-                if(!(element.soundState === 'MENU')){
-                    element.value = false;
-                }
+                element.value = false;
             });
         }
         game.ingameAudio.forEach(element=>{
@@ -144,18 +138,19 @@ window.addEventListener('load', function(){
                 element.stop();
             }
         });
+        
     }
-    
-    //functions for clicking inside canvas..
-    // function getMousePos(canvas, e) {
-    //     let rect = canvas.getBoundingClientRect();
-    //     return {
-    //         x: e.clientX - rect.left,
-    //         y: e.clientY - rect.top
-    //     };
-    // }
-    // function isInside(pos, rect){
-    //     return pos.x > rect.x && pos.x < rect.x+rect.width && pos.y < rect.y+rect.height && pos.y > rect.y
-    // }
-    // ////////////////////////////////////
+
+    // main menu theme AUDIO
+    const soundMenuTheme = new Sound(this, './assets/audio/main_menu_tematska_pesma_01.wav', 'MENU');
+    soundMenuTheme.audio.volume = 0.6;
+    soundOnBtnEl.addEventListener('click', ()=>{
+        if(soundOnBtnEl.classList.contains('mute-btn-play')){
+            soundOnBtnEl.classList.remove('mute-btn-play');
+            soundMenuTheme.stop();
+        }else{
+            soundMenuTheme.loop();
+            soundOnBtnEl.classList.add('mute-btn-play');
+        }
+    });
 }); 

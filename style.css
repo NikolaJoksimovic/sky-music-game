@@ -124,17 +124,8 @@ button:hover{
     color: var(--clr-primary-text);
     letter-spacing: 3px;
 }
-.mute-btn{
-    transition-duration: 0;
-}
-.mute-btn-hide{
-    margin: 0;
-    padding: 0;
-    border: none;
-    box-shadow: none !important;
-    width: 0;
-    overflow: hidden;
-    transition: all .1s linear;
+.mute-btn-play{
+    background-color: var(--clr-blood-red);
 }
 .main-container {
     width: 100%;
