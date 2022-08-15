@@ -4,7 +4,6 @@ import Enemy from './enemy.js'
 import Background from './background.js'
 import Sound from './sound.js';
 import EnemyBoss from './enemyBoss.js';
-import Menu from './menu.js';
 
 export default class Game{
     constructor(width, height){
@@ -23,16 +22,12 @@ export default class Game{
 
         // AUDIO
         this.ingameAudio = this.addSounds();
-        // this.ingameAudio.push(
-        //     new Sound(this, './assets/audio/final_koraci04.wav', 'IDLE')
-        // );
-        // this.ingameAudio.push(new Sound(this, './assets/audio/menu-theme-song.mp3', 'MENU'));
+
         // CLASSES
         this.input = new InputHanderl(this);
         this.player = new Player(this);
         this.background = new Background(this);
         this.enemyBoss = new EnemyBoss(this);
-        // this.menu = new Menu(this);
         
         
         // enemies generator
@@ -79,7 +74,6 @@ export default class Game{
     }
 
     displayTextStatus(ctx){
-        let maxTextWidht = 400;
         ctx.font = '40px Halvetica';
         ctx.fillStyle = 'black';
         ctx.fillText('Kills: ' + this.score + '/10', 20, 50);
