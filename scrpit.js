@@ -25,8 +25,8 @@ window.addEventListener('load', function(){
     let enableGodMode = false;
 
     // AUIDO /////////////////////////////////////////////////////////////
-    const soundMenuTheme = new Sound(this, './assets/audio/menu-theme-song.wav', 'MENU');
-    soundMenuTheme.audio.volume = 1;
+    const soundMenuTheme = new Sound(this, './assets/audio/main_menu_tematska_pesma_01.wav', 'MENU');
+    soundMenuTheme.audio.volume = 0.6;
     soundOnBtnEl.addEventListener('click', ()=>{
         soundMenuTheme.loop();
         soundOnBtnEl.classList.add('mute-btn-hide');
