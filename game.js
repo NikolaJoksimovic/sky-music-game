@@ -56,7 +56,7 @@ export default class Game{
         }else{
             this.enemyTimer += deltaTime;
         }
-        if(this.score === 1 && !this.enemyBossLive){
+        if(this.score === 10 && !this.enemyBossLive){
             this.enemies.push(this.enemyBoss);
             this.gameObjects.push(this.enemyBoss);
             this.enemyBossLive = true;

@@ -124,6 +124,9 @@ button:hover{
     color: var(--clr-primary-text);
     letter-spacing: 3px;
 }
+.mute-btn{
+    transition-duration: 0;
+}
 .mute-btn-hide{
     margin: 0;
     padding: 0;
