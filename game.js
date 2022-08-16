@@ -31,8 +31,9 @@ export default class Game{
         
         
         // enemies generator
-        this.enemyInterval = 500;
-        this.enemyTimer = 0;
+        this.enemyInterval = 500;   
+        // prvi duh krece na 5 sekundi po narudzbini.. 
+        this.enemyTimer = -5000;
         this.randomEnemyInterval = Math.random()*5000;
         this.enemyBossLive = false;
         
