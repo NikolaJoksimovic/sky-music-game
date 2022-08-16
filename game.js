@@ -51,6 +51,7 @@ export default class Game{
             this.randomEnemyInterval = Math.random()*5000;
         }else{
             this.enemyTimer += deltaTime;
+            console.log(this.enemyTimer);
         }
         if(this.score === 10 && !this.enemyBossLive){
             this.enemies.push(this.enemyBoss);
