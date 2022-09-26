@@ -32,7 +32,7 @@ export default class Game{
         
         // enemies generator
         this.enemyInterval = 500;   
-        // prvi duh krece na 5 sekundi po narudzbini.. 
+        // prvi duh krece na 5 sekundi(otp) po narudzbini.. 
         this.enemyTimer = -5000;
         this.randomEnemyInterval = Math.random()*5000;
         this.enemyBossLive = false;
@@ -86,7 +86,7 @@ export default class Game{
         let soundArray = [];
         const soundSteps = new Sound(this, './assets/audio/final_koraci04.wav', 'IDLE');
         soundArray.push(soundSteps);
-        const OST_theme = new Sound(this, "./assets/audio/OST_MK_3.wav");
+        const OST_theme = new Sound(this, "./assets/audio/OST_MK_5.wav");
         OST_theme.audio.volume = 0.3;
         soundArray.push(OST_theme);
         

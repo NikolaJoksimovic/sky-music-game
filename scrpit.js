@@ -19,11 +19,12 @@ window.addEventListener('load', function(){
     soundOnBtnEl = this.document.querySelector('#mute-btn');
     
     let lastTime = 0;
-    let game = new Game();
     let enableCollision = true;
     let enableHitboxes = false;
     let enableGodMode = false;
+    let game = new Game();
 
+    // Mora ovo da popravim zbog 4k rezolucije..
     canvasEl.width = 1280; 
     canvasEl.height = 720;
     
