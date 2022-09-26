@@ -13,8 +13,10 @@ const states = {
     JUMP_ATTACKING:     10
 }
 const soundStates = {
-    IDLE: 0,
-    MENU: 1,
+    IDLE:       0,
+    OST:        1,
+    ATTACKING:  2,
+    SLASHING:   3,
 }
 
 class State{
@@ -27,6 +29,7 @@ export class Idle extends State{
     constructor(player) {
         super('IDLE');
         this.player = player;
+        this.soundStates = soundStates;
     }
 
     enter(){
@@ -254,7 +257,8 @@ export class Attacking extends State{
         this.player.attackCooldownTimer = 0;
 
         // AUDIO
-        this.player.game.ingameAudio[0].value = false;
+        this.player.game.ingameAudio[soundStates.SLASHING].play();
+        this.player.game.ingameAudio[soundStates.ATTACKING].play();
     }
     handleInput(input){
         if(!this.player.playerAttacking()){
@@ -276,6 +280,10 @@ export class JumpAttacking extends State{
         this.player.speed = 0;
         this.player.attackAnimationTimer = 0;
         this.player.attackCooldownTimer = 0;
+
+        // AUDIO
+        this.player.game.ingameAudio[soundStates.SLASHING].play();
+        this.player.game.ingameAudio[soundStates.ATTACKING].play();
     }
     handleInput(input){
         if(!this.player.playerAttacking()){

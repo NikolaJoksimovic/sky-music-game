@@ -10,7 +10,14 @@ import {
     FallingLeft,
     Attacking,
     JumpAttacking
-} from './states.js'
+} from './states.js';
+
+const soundStates = {
+    IDLE:       0,
+    OST:        1,
+    ATTACKING:  2,
+    SLASHING:   3,
+}
 
 export default class Player{
     constructor(game){
@@ -52,7 +59,7 @@ export default class Player{
         this.attackAnimationTimer = 290;
         this.attackCooldownInterval = 690;
         this.attackCooldownTimer = 690;
-
+        
         //movement
         this.currentState = this.states[0];
         this.currentState.enter();
@@ -60,6 +67,8 @@ export default class Player{
         this.maxSpeed = 9;
         this.vy = 0;
         this.gravity = 0.98;
+
+        //collision
 
     }
     update(input, deltaTime, enemies){
@@ -92,10 +101,13 @@ export default class Player{
         }else{
             this.frameTimer+=deltaTime;
         }
+        
         //Enemy colision
         if(this.game.enemyCollisionEnabled){
             this.enemyCollision(enemies);
         }
+        this.game.ingameAudio[soundStates.ATTACKING].value = true;
+        this.game.ingameAudio[soundStates.SLASHING].value = false;
     }
     draw(ctx){
         ctx.drawImage(this.image, this.frameX*250, this.frameY*200, this.width, this.height,  this.x, this.y, this.width, this.height);
@@ -112,6 +124,7 @@ export default class Player{
             ctx.stroke();
         }
     }
+    // COLLISION *************
     enemyCollision(enemies){
         enemies.forEach(enemy => {
             if(this.playerAttacking()){
@@ -131,6 +144,12 @@ export default class Player{
                         enemy.dead = true;
                         this.game.score++;
                     }
+                    
+                    this.game.ingameAudio[soundStates.ATTACKING].value = false;
+                    this.game.ingameAudio[soundStates.SLASHING].value = true;
+                    
+                    this.game.ingameAudio[soundStates.SLASHING].play();
+                    this.game.ingameAudio[soundStates.ATTACKING].play();
                 }
             }else{
                 if(!this.game.godModeOn){

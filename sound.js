@@ -9,7 +9,9 @@ export default class Sound{
     }
 
     play(){
-        this.audio.play();
+        if(this.value){
+            this.audio.play();
+        }
     }
     stop(){
         this.audio.pause();

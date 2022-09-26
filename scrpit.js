@@ -2,10 +2,12 @@ import Game from './game.js';
 import Sound from './sound.js';
 
 window.addEventListener('load', function(){
-    
+
+    // preloader
     const preloader = this.document.getElementById('preloader');
     preloader.style.display = 'none';
-
+    // // // // // // // // // // // //
+    
     const canvasEl = this.document.getElementById('canvas-main'),
     ctx = canvasEl.getContext('2d'),
     playBtnEl = this.document.querySelector('.play-btn'),
@@ -102,7 +104,9 @@ window.addEventListener('load', function(){
         game.enableHitboxes = enableHitboxes;
         game.godModeOn = enableGodMode;
         game.ingameAudio.forEach(element=>{
-            element.value = true;
+            if(element.soundState === 'IDLE' || element.soundState === 'OST'){
+                element.value = true;
+            }
         });
 
         this.requestAnimationFrame(animate);
@@ -135,11 +139,13 @@ window.addEventListener('load', function(){
             });
         }
         game.ingameAudio.forEach(element=>{
-            if(element.value === true){
-                element.loop();
-            }
-            else{
-                element.stop();
+            if(element.soundState === 'IDLE' || element.soundState === 'OST'){
+                if(element.value === true){
+                    element.loop();
+                }
+                else{
+                    element.stop();
+                }
             }
         });
         

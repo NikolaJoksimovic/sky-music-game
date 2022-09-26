@@ -51,7 +51,7 @@ export default class Game{
             this.randomEnemyInterval = Math.random()*5000;
         }else{
             this.enemyTimer += deltaTime;
-            console.log(this.enemyTimer);
+            // console.log(this.enemyTimer);
         }
         if(this.score === 10 && !this.enemyBossLive){
             this.enemies.push(this.enemyBoss);
@@ -86,11 +86,17 @@ export default class Game{
         let soundArray = [];
         const soundSteps = new Sound(this, './assets/audio/final_koraci04.wav', 'IDLE');
         soundArray.push(soundSteps);
-        const OST_theme = new Sound(this, "./assets/audio/OST_MK_5.wav");
-        OST_theme.audio.volume = 0.3;
+        const OST_theme = new Sound(this, './assets/audio/OST_MK_5.wav', 'OST');
+        OST_theme.audio.volume = 0.2;
         soundArray.push(OST_theme);
-        
-        
+        const soundAttacking = new Sound(this, './assets/audio/01_F1_cut.wav', 'ATTACKING');
+        soundAttacking.audio.volume = 0.2
+        soundAttacking.value = true;
+        soundArray.push(soundAttacking);
+        const soundSlashing = new Sound(this, './assets/audio/rch03_F01_cut.wav', 'SLASHING');
+        soundSlashing.value = true;
+        soundArray.push(soundSlashing);
+
         return soundArray;
     }
 }
