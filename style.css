@@ -1,5 +1,6 @@
 :root{
     --clr-transperent: hsl(0, 0%, 0%);
+    --clr-black: hsla(0, 0%, 0%);
     --clr-black05: hsla(0, 0%, 0%, 0.5);
     --clr-black08: hsla(0, 0%, 0%, 0.8);
     --clr-black095: hsla(0, 0%, 0%, 0.95);
@@ -45,6 +46,14 @@ button:hover{
     color: var(--clr-primary-text);
     letter-spacing: 3px;
     z-index: 11;
+}
+/* PRELOADER */
+#preloader{
+    z-index: 999;
+    background: var(--clr-black) url('./assets/preloader/preloader.png') center no-repeat;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
 }
 /* CANVAS ELEMENTS */
 #canvas-main{
