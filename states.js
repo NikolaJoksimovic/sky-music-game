@@ -1,293 +1,307 @@
-
 const states = {
-    IDLE:               0,
-    RUNNING_RIGHT:      1,
-    RUNNING_LEFT:       2,
-    JUMPING:            3,
-    FALLING:            4,
-    JUMPING_RIGHT:      5,
-    JUMPING_LEFT:       6,
-    FALLING_RIGHT:      7,
-    FALLING_LEFT:       8,
-    ATTACKING:          9,
-    JUMP_ATTACKING:     10
-}
-const soundStates = {
-    IDLE:       0,
-    OST:        1,
-    ATTACKING:  2,
-    SLASHING:   3,
-}
+  IDLE: 0,
+  RUNNING_RIGHT: 1,
+  RUNNING_LEFT: 2,
+  JUMPING: 3,
+  FALLING: 4,
+  JUMPING_RIGHT: 5,
+  JUMPING_LEFT: 6,
+  FALLING_RIGHT: 7,
+  FALLING_LEFT: 8,
+  ATTACKING: 9,
+  JUMP_ATTACKING: 10,
+};
+export const soundStates = {
+  IDLE: 0,
+  OST: 1,
+  ATTACKING: 2,
+  SLASHING: 3,
+};
 
-class State{
-    constructor(state){
-        this.state = state;
-    }
-}
-
-export class Idle extends State{
-    constructor(player) {
-        super('IDLE');
-        this.player = player;
-        this.soundStates = soundStates;
-    }
-
-    enter(){
-        this.player.frameInterval = 1000/this.player.fps;
-        this.player.maxFrames = 9;
-        this.player.frameY = 8;
-        this.player.frameX = 0;
-        this.player.speed = 0;
-        
-        // AUDIO
-        this.player.game.ingameAudio[soundStates.IDLE].value = true;
-        this.player.game.ingameAudio[soundStates.IDLE].audio.playbackRate = 1.1;
-    }
-    handleInput(input){
-        if(input.includes('ArrowRight')){
-            this.player.setState(states.RUNNING_RIGHT);
-        }else if(input.includes('ArrowLeft')){
-            this.player.setState(states.RUNNING_LEFT);
-        }else if(input.includes('ArrowUp') && this.player.playerOnGround()){
-            this.player.setState(states.JUMPING);
-        }else if(input.includes(' ') && this.player.playerAttackReady()){
-            this.player.setState(states.ATTACKING);
-        }
-    }
-}
-export class RunningRight extends State{
-    constructor(player) {
-        super('RUNNING_RIGHT');
-        this.player = player;
-    }
-    
-    enter(){
-        this.player.frameInterval = 500/this.player.fps;
-        this.player.maxFrames = 9;
-        this.player.frameY = 8;
-        this.player.speed = this.player.maxSpeed;
-
-        // AUDIO
-        this.player.game.ingameAudio[soundStates.IDLE].audio.playbackRate = 1.6;
-        
-    }
-    handleInput(input){
-        if(input.includes('ArrowLeft') && comesAfter('ArrowLeft', 'ArrowRight', input)){
-                this.player.setState(states.RUNNING_LEFT);
-        }else if(!input.includes('ArrowRight')){
-            this.player.setState(states.IDLE);
-        }else if(input.includes('ArrowUp') && this.player.playerOnGround()){
-            this.player.setState(states.JUMPING);
-        }else if(input.includes(' ') && this.player.playerAttackReady()){
-            this.player.setState(states.ATTACKING);
-        }
-    }
-}
-export class RunningLeft extends State{
-    constructor(player) {
-        super('RUNNING_LEFT');
-        this.player = player;
-    }
-
-    enter(){
-        this.player.frameInterval = 500/this.player.fps;
-        this.player.maxFrames = 9;
-        this.player.frameY = 8;
-        this.player.speed = -this.player.maxSpeed;
-        
-        // AUDIO
-        this.player.game.ingameAudio[soundStates.IDLE].audio.playbackRate = 1.5;
-    }
-    handleInput(input){
-        if(input.includes('ArrowRight') && comesAfter('ArrowRight', 'ArrowLeft', input)){
-                this.player.setState(states.RUNNING_RIGHT);
-        }else if(!input.includes('ArrowLeft')){
-            this.player.setState(states.IDLE);
-        }else if(input.includes('ArrowUp') && this.player.playerOnGround()){
-            this.player.setState(states.JUMPING);
-        }else if(input.includes(' ') && this.player.playerAttackReady()){
-            this.player.setState(states.ATTACKING);
-        }
-    }
+class State {
+  constructor(state) {
+    this.state = state;
+  }
 }
 
-export class Jumping extends State{
-    constructor(player) {
-        super('JUMPING');
-        this.player = player;
-    }
+export class Idle extends State {
+  constructor(player) {
+    super("IDLE");
+    this.player = player;
+    this.soundStates = soundStates;
+  }
 
-    enter(){
-        this.player.frameInterval = 2000/this.player.fps;
-        this.player.maxFrames = 4;
-        this.player.frameX = 0;
-        this.player.frameY = 7;
-        this.player.vy = -30;
+  enter() {
+    this.player.frameInterval = 1000 / this.player.fps;
+    this.player.maxFrames = 9;
+    this.player.frameY = 8;
+    this.player.frameX = 0;
+    this.player.speed = 0;
 
-        // AUDIO
-        this.player.game.ingameAudio[0].value = false;
+    // AUDIO
+    this.player.game.ingameAudio[soundStates.IDLE].value = true;
+    this.player.game.ingameAudio[soundStates.IDLE].audio.playbackRate = 1.1;
+  }
+  handleInput(input) {
+    if (input.includes("ArrowRight")) {
+      this.player.setState(states.RUNNING_RIGHT);
+    } else if (input.includes("ArrowLeft")) {
+      this.player.setState(states.RUNNING_LEFT);
+    } else if (input.includes("ArrowUp") && this.player.playerOnGround()) {
+      this.player.setState(states.JUMPING);
+    } else if (input.includes(" ") && this.player.playerAttackReady()) {
+      this.player.setState(states.ATTACKING);
     }
-    handleInput(input){
-        if(this.player.vy > this.player.gravity){
-            this.player.setState(states.FALLING);
-        }else if(input.includes('ArrowRight')){
-            this.player.setState(states.JUMPING_RIGHT);
-        }else if(input.includes('ArrowLeft')){
-            this.player.setState(states.JUMPING_LEFT);
-        }else if(input.includes(' ') && this.player.playerAttackReady()){
-                this.player.setState(states.JUMP_ATTACKING);
-        }
-    }
+  }
 }
-export class JumpingRight extends State{
-    constructor(player) {
-        super('JUMPING_RIGHT');
-        this.player = player;
-    }
+export class RunningRight extends State {
+  constructor(player) {
+    super("RUNNING_RIGHT");
+    this.player = player;
+  }
 
-    enter(){
-        this.player.speed = this.player.maxSpeed;
+  enter() {
+    this.player.frameInterval = 500 / this.player.fps;
+    this.player.maxFrames = 9;
+    this.player.frameY = 8;
+    this.player.speed = this.player.maxSpeed;
+
+    // AUDIO
+    this.player.game.ingameAudio[soundStates.IDLE].audio.playbackRate = 1.6;
+  }
+  handleInput(input) {
+    if (
+      input.includes("ArrowLeft") &&
+      comesAfter("ArrowLeft", "ArrowRight", input)
+    ) {
+      this.player.setState(states.RUNNING_LEFT);
+    } else if (!input.includes("ArrowRight")) {
+      this.player.setState(states.IDLE);
+    } else if (input.includes("ArrowUp") && this.player.playerOnGround()) {
+      this.player.setState(states.JUMPING);
+    } else if (input.includes(" ") && this.player.playerAttackReady()) {
+      this.player.setState(states.ATTACKING);
     }
-    handleInput(input){
-        if(this.player.vy > this.player.gravity){
-            this.player.setState(states.FALLING);
-        }else if(input.includes('ArrowLeft') && comesAfter('ArrowLeft', 'ArrowRight', input)){
-            this.player.setState(states.JUMPING_LEFT);
-        }else if(input.includes(' ') && this.player.playerAttackReady()){
-                this.player.setState(states.JUMP_ATTACKING);
-        }
-    }
+  }
 }
-export class JumpingLeft extends State{
-    constructor(player) {
-        super('JUMPING_LEFT');
-        this.player = player;
-    }
+export class RunningLeft extends State {
+  constructor(player) {
+    super("RUNNING_LEFT");
+    this.player = player;
+  }
 
-    enter(){
-        this.player.speed = -this.player.maxSpeed;
-    }
-    handleInput(input){
-        if(this.player.vy > this.player.gravity){
-            this.player.setState(states.FALLING);
-        }else if(input.includes('ArrowRight') && comesAfter('ArrowRight', 'ArrowLeft', input)){
-            this.player.setState(states.JUMPING_RIGHT);
-        }else if(input.includes(' ') && this.player.playerAttackReady()){
-                this.player.setState(states.JUMP_ATTACKING);
-        }
-    }
-}
-export class Falling extends State{
-    constructor(player) {
-        super('FALLING');
-        this.player = player;
-    }
+  enter() {
+    this.player.frameInterval = 500 / this.player.fps;
+    this.player.maxFrames = 9;
+    this.player.frameY = 8;
+    this.player.speed = -this.player.maxSpeed;
 
-    enter(){
-        this.player.frameY = 7;
-        this.player.frameX = 3;
+    // AUDIO
+    this.player.game.ingameAudio[soundStates.IDLE].audio.playbackRate = 1.5;
+  }
+  handleInput(input) {
+    if (
+      input.includes("ArrowRight") &&
+      comesAfter("ArrowRight", "ArrowLeft", input)
+    ) {
+      this.player.setState(states.RUNNING_RIGHT);
+    } else if (!input.includes("ArrowLeft")) {
+      this.player.setState(states.IDLE);
+    } else if (input.includes("ArrowUp") && this.player.playerOnGround()) {
+      this.player.setState(states.JUMPING);
+    } else if (input.includes(" ") && this.player.playerAttackReady()) {
+      this.player.setState(states.ATTACKING);
     }
-    handleInput(input){
-        if(this.player.playerOnGround()){
-            this.player.setState(states.IDLE);
-        }else if(input.includes('ArrowRight')){
-            this.player.setState(states.FALLING_RIGHT);
-        }else if(input.includes('ArrowLeft')){
-            this.player.setState(states.FALLING_LEFT);
-        }else if(input.includes(' ') && this.player.playerAttackReady()){
-                this.player.setState(states.JUMP_ATTACKING);
-        }
-    }
-}
-export class FallingRight extends State{
-    constructor(player) {
-        super('FALLING_RIGHT');
-        this.player = player;
-    }
-
-    enter(){
-        this.player.speed = this.player.maxSpeed;
-    }
-    handleInput(input){
-        if(this.player.playerOnGround()){
-            this.player.setState(states.IDLE);
-        }else if(input.includes('ArrowLeft') && comesAfter('ArrowLeft', 'ArrowRight', input)){
-            this.player.setState(states.FALLING_LEFT);
-        }else if(input.includes(' ') && this.player.playerAttackReady()){
-                this.player.setState(states.JUMP_ATTACKING);
-        }
-    }
-}
-export class FallingLeft extends State{
-    constructor(player) {
-        super('FALLING_LEFT');
-        this.player = player;
-    }
-
-    enter(){
-        this.player.speed = -this.player.maxSpeed;
-    }
-    handleInput(input){
-        if(this.player.playerOnGround()){
-            this.player.setState(states.IDLE);
-        }else if(input.includes('ArrowRight') && comesAfter('ArrowRight', 'ArrowLeft', input)){
-            this.player.setState(states.FALLING_RIGHT);
-        }else if(input.includes(' ') && this.player.playerAttackReady()){
-                this.player.setState(states.JUMP_ATTACKING);
-        }
-    }
+  }
 }
 
-function comesAfter(element1, element2, array){
-    return array.indexOf(element1) > array.indexOf(element2);
+export class Jumping extends State {
+  constructor(player) {
+    super("JUMPING");
+    this.player = player;
+  }
+
+  enter() {
+    this.player.frameInterval = 2000 / this.player.fps;
+    this.player.maxFrames = 4;
+    this.player.frameX = 0;
+    this.player.frameY = 7;
+    this.player.vy = -30;
+
+    // AUDIO
+    this.player.game.ingameAudio[0].value = false;
+  }
+  handleInput(input) {
+    if (this.player.vy > this.player.gravity) {
+      this.player.setState(states.FALLING);
+    } else if (input.includes("ArrowRight")) {
+      this.player.setState(states.JUMPING_RIGHT);
+    } else if (input.includes("ArrowLeft")) {
+      this.player.setState(states.JUMPING_LEFT);
+    } else if (input.includes(" ") && this.player.playerAttackReady()) {
+      this.player.setState(states.JUMP_ATTACKING);
+    }
+  }
+}
+export class JumpingRight extends State {
+  constructor(player) {
+    super("JUMPING_RIGHT");
+    this.player = player;
+  }
+
+  enter() {
+    this.player.speed = this.player.maxSpeed;
+  }
+  handleInput(input) {
+    if (this.player.vy > this.player.gravity) {
+      this.player.setState(states.FALLING);
+    } else if (
+      input.includes("ArrowLeft") &&
+      comesAfter("ArrowLeft", "ArrowRight", input)
+    ) {
+      this.player.setState(states.JUMPING_LEFT);
+    } else if (input.includes(" ") && this.player.playerAttackReady()) {
+      this.player.setState(states.JUMP_ATTACKING);
+    }
+  }
+}
+export class JumpingLeft extends State {
+  constructor(player) {
+    super("JUMPING_LEFT");
+    this.player = player;
+  }
+
+  enter() {
+    this.player.speed = -this.player.maxSpeed;
+  }
+  handleInput(input) {
+    if (this.player.vy > this.player.gravity) {
+      this.player.setState(states.FALLING);
+    } else if (
+      input.includes("ArrowRight") &&
+      comesAfter("ArrowRight", "ArrowLeft", input)
+    ) {
+      this.player.setState(states.JUMPING_RIGHT);
+    } else if (input.includes(" ") && this.player.playerAttackReady()) {
+      this.player.setState(states.JUMP_ATTACKING);
+    }
+  }
+}
+export class Falling extends State {
+  constructor(player) {
+    super("FALLING");
+    this.player = player;
+  }
+
+  enter() {
+    this.player.frameY = 7;
+    this.player.frameX = 3;
+  }
+  handleInput(input) {
+    if (this.player.playerOnGround()) {
+      this.player.setState(states.IDLE);
+    } else if (input.includes("ArrowRight")) {
+      this.player.setState(states.FALLING_RIGHT);
+    } else if (input.includes("ArrowLeft")) {
+      this.player.setState(states.FALLING_LEFT);
+    } else if (input.includes(" ") && this.player.playerAttackReady()) {
+      this.player.setState(states.JUMP_ATTACKING);
+    }
+  }
+}
+export class FallingRight extends State {
+  constructor(player) {
+    super("FALLING_RIGHT");
+    this.player = player;
+  }
+
+  enter() {
+    this.player.speed = this.player.maxSpeed;
+  }
+  handleInput(input) {
+    if (this.player.playerOnGround()) {
+      this.player.setState(states.IDLE);
+    } else if (
+      input.includes("ArrowLeft") &&
+      comesAfter("ArrowLeft", "ArrowRight", input)
+    ) {
+      this.player.setState(states.FALLING_LEFT);
+    } else if (input.includes(" ") && this.player.playerAttackReady()) {
+      this.player.setState(states.JUMP_ATTACKING);
+    }
+  }
+}
+export class FallingLeft extends State {
+  constructor(player) {
+    super("FALLING_LEFT");
+    this.player = player;
+  }
+
+  enter() {
+    this.player.speed = -this.player.maxSpeed;
+  }
+  handleInput(input) {
+    if (this.player.playerOnGround()) {
+      this.player.setState(states.IDLE);
+    } else if (
+      input.includes("ArrowRight") &&
+      comesAfter("ArrowRight", "ArrowLeft", input)
+    ) {
+      this.player.setState(states.FALLING_RIGHT);
+    } else if (input.includes(" ") && this.player.playerAttackReady()) {
+      this.player.setState(states.JUMP_ATTACKING);
+    }
+  }
 }
 
-export class Attacking extends State{
-    constructor(player) {
-        super('ATTACKING');
-        this.player = player;
-    }
-    enter(){
-        this.player.frameInterval = 100/this.player.fps; //miliseconds
-        this.player.frameY = 0;
-        this.player.frameX = 2;
-        this.player.maxFrames = 7;
-        this.player.speed = -this.player.game.background.layer5Speed;
-        this.player.attackAnimationTimer = 0;
-        this.player.attackCooldownTimer = 0;
-
-        // AUDIO
-        this.player.game.ingameAudio[soundStates.SLASHING].play();
-        this.player.game.ingameAudio[soundStates.ATTACKING].play();
-    }
-    handleInput(input){
-        if(!this.player.playerAttacking()){
-            this.player.setState(states.IDLE);
-        }
-    }
+function comesAfter(element1, element2, array) {
+  return array.indexOf(element1) > array.indexOf(element2);
 }
 
-export class JumpAttacking extends State{
-    constructor(player) {
-        super('JUMP_ATTACKING');
-        this.player = player;
-    }
-    enter(){
-        this.player.frameInterval = 100/this.player.fps; //miliseconds
-        this.player.frameY = 6;
-        this.player.frameX = 2;
-        this.player.maxFrames = 7;
-        this.player.speed = 0;
-        this.player.attackAnimationTimer = 0;
-        this.player.attackCooldownTimer = 0;
+export class Attacking extends State {
+  constructor(player) {
+    super("ATTACKING");
+    this.player = player;
+  }
+  enter() {
+    this.player.frameInterval = 100 / this.player.fps; //miliseconds
+    this.player.frameY = 0;
+    this.player.frameX = 2;
+    this.player.maxFrames = 7;
+    this.player.speed = -this.player.game.background.layer5Speed;
+    this.player.attackAnimationTimer = 0;
+    this.player.attackCooldownTimer = 0;
 
-        // AUDIO
-        this.player.game.ingameAudio[soundStates.SLASHING].play();
-        this.player.game.ingameAudio[soundStates.ATTACKING].play();
+    // AUDIO
+    this.player.game.ingameAudio[soundStates.ATTACKING].play();
+  }
+  handleInput(input) {
+    if (!this.player.playerAttacking()) {
+      this.player.setState(states.IDLE);
     }
-    handleInput(input){
-        if(!this.player.playerAttacking()){
-            this.player.setState(states.FALLING);
-        }
+  }
+}
+
+export class JumpAttacking extends State {
+  constructor(player) {
+    super("JUMP_ATTACKING");
+    this.player = player;
+  }
+  enter() {
+    this.player.frameInterval = 100 / this.player.fps; //miliseconds
+    this.player.frameY = 6;
+    this.player.frameX = 2;
+    this.player.maxFrames = 7;
+    this.player.speed = 0;
+    this.player.attackAnimationTimer = 0;
+    this.player.attackCooldownTimer = 0;
+
+    // AUDIO
+    this.player.game.ingameAudio[soundStates.ATTACKING].play();
+  }
+  handleInput(input) {
+    if (!this.player.playerAttacking()) {
+      this.player.setState(states.FALLING);
     }
+  }
 }

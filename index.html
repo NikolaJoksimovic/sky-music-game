@@ -1,91 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- favicon -->
-    <link rel="icon" type="image/x-icon" href="./assets/girlSpriteSheets/originals/png/favicon.png">
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./assets/girlSpriteSheets/originals/png/favicon.png"
+    />
     <!-- font awesome -->
     <script src="./all.js"></script>
     <!-- main css -->
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css" />
 
     <title>十面埋伏</title>
-</head>
-<body>
+  </head>
+  <body>
     <!-- preloader -->
     <div id="preloader"></div>
     <!-- end of preloader -->
 
     <div class="main-container">
-        <div class="menu-left">
+      <div class="menu-left"></div>
+      <div class="title-container">
+        <div class="title">
+          <h1>十面埋伏</h1>
+        </div>
+        <div class="menu">
+          <div class="buttons">
+            <button id="mute-btn" value="off">
+              <i class="fa-solid fa-music"></i>
+            </button>
+            <button class="play-btn">play</button>
+            <button class="options-btn">options</button>
+            <button class="controls-btn">controls</button>
+          </div>
+        </div>
+      </div>
+      <div class="menu-right"></div>
 
+      <div class="options-container">
+        <div class="options">
+          <button id="options-enemy-collision" class="primary-btn" value="on">
+            Enemy collision: ON
+          </button>
+          <button id="options-hitboxes" class="primary-btn" value="off">
+            Hitboxes: OFF
+          </button>
+          <button id="options-godmode" class="primary-btn" value="off">
+            god mode: OFF
+          </button>
         </div>
-        <div class="title-container">
-            <div class="title">
-                <h1>十面埋伏</h1>
-            </div>
-            <div class="menu">
-                <div class="buttons">
-                    <button id="mute-btn" value="off"><i class="fa-solid fa-music"></i></button>
-                    <button class="play-btn">play</button>
-                    <button class="options-btn">options</button>
-                    <button class="controls-btn">controls</button>
-                </div>
-            </div>
+      </div>
+      <div class="controls-container">
+        <div class="controls-desc">
+          <div class="primary-btn">Jump:</div>
+          <div class="primary-btn">Run Left:</div>
+          <div class="primary-btn">Run Right:</div>
+          <div class="primary-btn">Attack:</div>
+          <div class="primary-btn">Main Menu:</div>
         </div>
-        <div class="menu-right">
-            
+        <div class="controls">
+          <div class="primary-btn">Arrow Up</div>
+          <div class="primary-btn">Arrow Left</div>
+          <div class="primary-btn">Arrow Right</div>
+          <div class="primary-btn">Spacebar</div>
+          <div class="primary-btn">Esc</div>
         </div>
-
-        <div class="options-container">
-            <div class="options">
-                <button id="options-enemy-collision" class="primary-btn" value="on">Enemy collision: ON</button>
-                <button id="options-hitboxes" class="primary-btn" value="off">Hitboxes: OFF</button>
-                <button id="options-godmode" class="primary-btn" value="off">god mode: OFF</button>
-            </div>
-        </div>
-        <div class="controls-container">
-            <div class="controls-desc">
-                <div class="primary-btn">Jump:</div>
-                <div class="primary-btn">Run Left:</div>
-                <div class="primary-btn">Run Right:</div>
-                <div class="primary-btn">Attack:</div>
-                <div class="primary-btn">Main Menu:</div>
-            </div>
-            <div class="controls">
-                <div class="primary-btn">Arrow Up</div>
-                <div class="primary-btn">Arrow Left</div>
-                <div class="primary-btn">Arrow Right</div>
-                <div class="primary-btn">Spacebar</div>
-                <div class="primary-btn">Esc</div>
-            </div>
-        </div>
-        <button class="back-btn primary-btn">back</button>
-    
+      </div>
+      <button class="back-btn primary-btn">back</button>
     </div>
     <!-- CANVAS -->
-        <canvas id="canvas-main"></canvas>
+    <canvas id="canvas-main"></canvas>
 
-        <!-- **************************************** -->
-        <!-- THESE IMAGES ARE USED FOR CANVAS PAINTING-->
-        <!-- player -->
-        <img id="player-img" src="./assets/girlSpriteSheets/ninjaGirlSpriteSheet.png" alt="ninjaGirl.png">
-        <!-- enemy -->
-        <img id="enemy-ghost-img" src="./assets/ghostEnemySpriteSheets/ghostEnemySpriteSheet.png" alt="ghostEnemy.png">
-        <!-- enemy boss -->
-        <img id="enemy-boss-img" src="./assets/menu-background/enemy-boss.png" alt="enemyBoss.png">
-        <!-- background -->
-        <img class="parallaximg" id="layer1" src="./assets/forestBackground/Cartoon_Forest_BG_02/Layers/Sky.png" alt="">
-        <img class="parallaximg" id="layer2" src="./assets/forestBackground/Cartoon_Forest_BG_02/Layers/BG_Decor.png" alt="">
-        <img class="parallaximg" id="layer3" src="./assets/forestBackground/Cartoon_Forest_BG_02/Layers/Middle_Decor.png" alt="">
-        <img class="parallaximg" id="layer4" src="./assets/forestBackground/Cartoon_Forest_BG_02/Layers/Foreground.png" alt="">
-        <img class="parallaximg" id="layer5" src="./assets/forestBackground/Cartoon_Forest_BG_02/Layers/Ground.png" alt="">
-        <!-- *************************************** -->
+    <!-- **************************************** -->
+    <!-- THESE IMAGES ARE USED FOR CANVAS PAINTING-->
+    <!-- player -->
+    <img
+      id="player-img"
+      src="./assets/girlSpriteSheets/ninjaGirlSpriteSheet.png"
+      alt="ninjaGirl.png"
+    />
+    <!-- enemy -->
+    <img
+      id="enemy-ghost-img"
+      src="./assets/ghostEnemySpriteSheets/ghostEnemySpriteSheet.png"
+      alt="ghostEnemy.png"
+    />
+    <!-- enemy boss -->
+    <img
+      id="enemy-boss-img"
+      src="./assets/menu-background/enemy-boss.png"
+      alt="enemyBoss.png"
+    />
+    <!-- background -->
+    <img
+      class="parallaximg"
+      id="layer1"
+      src="./assets/forestBackground/Cartoon_Forest_BG_02/Layers/Sky.png"
+      alt=""
+    />
+    <img
+      class="parallaximg"
+      id="layer2"
+      src="./assets/forestBackground/Cartoon_Forest_BG_02/Layers/BG_Decor.png"
+      alt=""
+    />
+    <img
+      class="parallaximg"
+      id="layer3"
+      src="./assets/forestBackground/Cartoon_Forest_BG_02/Layers/Middle_Decor.png"
+      alt=""
+    />
+    <img
+      class="parallaximg"
+      id="layer4"
+      src="./assets/forestBackground/Cartoon_Forest_BG_02/Layers/Foreground.png"
+      alt=""
+    />
+    <img
+      class="parallaximg"
+      id="layer5"
+      src="./assets/forestBackground/Cartoon_Forest_BG_02/Layers/Ground.png"
+      alt=""
+    />
+    <!-- *************************************** -->
 
     <!-- END OF CANVAS -->
 
+    <!-- VOLUME SLIDER -->
+    <div class="slider-container">
+      <h4>volume</h4>
+      <label for="volume-slider-ost">ost</label>
+      <input
+        id="volume-slider-ost"
+        class="slider"
+        type="range"
+        min="0"
+        max="100"
+        value="20"
+      />
+      <label for="volume-slider-ost">steps</label>
+      <input
+        id="volume-slider-steps"
+        class="slider"
+        type="range"
+        min="0"
+        max="100"
+        value="100"
+      />
+      <label for="volume-slider-ost">attack</label>
+      <input
+        id="volume-slider-attack"
+        class="slider"
+        type="range"
+        min="0"
+        max="100"
+        value="100"
+      />
+    </div>
+    <!-- End of VOLUME SLIDER -->
+
+    <!-- my script -->
     <script type="module" src="./scrpit.js"></script>
-</body>
+  </body>
 </html>
