@@ -104,9 +104,6 @@ export default class Player {
     if (this.game.enemyCollisionEnabled) {
       this.enemyCollision(enemies);
     }
-    // sound
-    this.game.ingameAudio[soundStates.ATTACKING].value = true;
-    this.game.ingameAudio[soundStates.SLASHING].value = false;
   }
   draw(ctx) {
     ctx.drawImage(
@@ -164,7 +161,6 @@ export default class Player {
             enemy.dead = true;
             this.game.score++;
           }
-          this.game.ingameAudio[soundStates.SLASHING].value = true;
           this.game.ingameAudio[soundStates.SLASHING].play();
         }
       } else {

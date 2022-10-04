@@ -136,6 +136,9 @@ window.addEventListener("load", function () {
     // set the volume sliders
     let slidersOffsetTop = (this.screen.height - canvasEl.offsetHeight) / 2;
     let slidersOffsetRight = (this.screen.width - canvasEl.offsetWidth) / 2;
+    console.log(this.screen.height);
+    console.log(canvasEl.offsetHeight);
+    console.log(slidersOffsetTop, slidersOffsetRight);
     sliderContainerEl.style.top = `${slidersOffsetTop}px`;
     sliderContainerEl.style.right = `${slidersOffsetRight}px`;
     sliderContainerEl.classList.remove("slider-container-hide");
@@ -205,7 +208,7 @@ window.addEventListener("load", function () {
     "./assets/audio/main_menu_tematska_pesma_01.wav",
     "MENU"
   );
-  soundMenuTheme.audio.volume = 0.6;
+  soundMenuTheme.audio.volume = 0.4;
   soundOnBtnEl.addEventListener("click", () => {
     if (soundOnBtnEl.classList.contains("mute-btn-play")) {
       soundOnBtnEl.classList.remove("mute-btn-play");

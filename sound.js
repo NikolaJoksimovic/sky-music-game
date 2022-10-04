@@ -10,8 +10,12 @@ export default class Sound {
 
   play() {
     if (this.value) {
-      this.stop();
-      this.audio.play();
+      if (!this.game.enemyBossLive) {
+        this.stop();
+        this.audio.play();
+      } else {
+        this.audio.play();
+      }
     }
   }
   stop() {
