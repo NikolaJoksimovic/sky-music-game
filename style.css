@@ -213,25 +213,38 @@ button:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
 
   /* style */
   padding: 10px;
   background-color: transparent;
-  /* color: var(--clr-blood-red); */
   color: var(--clr-white);
   font-size: 0.7rem;
   text-transform: uppercase;
+  caret-color: transparent;
+}
+.slider-container-hide {
+  display: none;
 }
 .slider-container h4 {
   text-align: center;
 }
+.slider-container label {
+  padding: 4px;
+  color: var(--clr-white);
+}
 .slider {
   cursor: pointer;
   outline: none;
-  caret-color: transparent;
   height: 5px;
+  appearance: none;
+  background-color: var(--clr-blood-red);
 }
 .slider::-webkit-slider-thumb {
+  appearance: none;
+  height: 11px;
+  width: 11px;
   background-color: var(--clr-white);
+}
+.slider::-webkit-slider-runnable-track {
+  appearance: none;
 }

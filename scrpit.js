@@ -33,9 +33,11 @@ window.addEventListener("load", function () {
   let game = new Game();
 
   // INGAME AUDIO VOLUME SLIDERS
-  let volumeSliderOSTEl = this.document.getElementById("volume-slider-ost");
-  let volumeSliderStepsEl = this.document.getElementById("volume-slider-steps");
-  let volumeSliderAttackEl = this.document.getElementById(
+  const volumeSliderOSTEl = this.document.getElementById("volume-slider-ost");
+  const volumeSliderStepsEl = this.document.getElementById(
+    "volume-slider-steps"
+  );
+  const volumeSliderAttackEl = this.document.getElementById(
     "volume-slider-attack"
   );
   [volumeSliderOSTEl, volumeSliderStepsEl, volumeSliderAttackEl].forEach(
@@ -130,6 +132,14 @@ window.addEventListener("load", function () {
   playBtnEl.addEventListener("click", (e) => {
     mainContainerEl.classList.add("hide-main-container");
     game = new Game(canvasEl.width, canvasEl.height);
+
+    // set the volume sliders
+    let slidersOffsetTop = (this.screen.height - canvasEl.offsetHeight) / 2;
+    let slidersOffsetRight = (this.screen.width - canvasEl.offsetWidth) / 2;
+    sliderContainerEl.style.top = `${slidersOffsetTop}px`;
+    sliderContainerEl.style.right = `${slidersOffsetRight}px`;
+    sliderContainerEl.classList.remove("slider-container-hide");
+    // end of setting volume sliders
     game.gamePaused = false;
     game.gameOver = false;
     game.enemyCollisionEnabled = enableCollision;
@@ -158,7 +168,6 @@ window.addEventListener("load", function () {
     lastTime = timeStamp;
 
     ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
-
     game.update(deltaTime);
     game.draw(ctx);
 
@@ -166,6 +175,7 @@ window.addEventListener("load", function () {
       requestAnimationFrame(animate);
       soundMenuTheme.stop();
     } else if (game.gameOver) {
+      sliderContainerEl.classList.add("slider-container-hide");
       mainContainerEl.classList.toggle("hide-main-container");
       if (soundOnBtnEl.classList.contains("mute-btn-play")) {
         soundMenuTheme.loop();
