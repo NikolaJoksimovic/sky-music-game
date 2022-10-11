@@ -71,8 +71,9 @@ window.addEventListener("load", function () {
 
   // leti buda leti button
   letibudaletiBtnEl.addEventListener("click", (e) => {
-    // preloader.style.display = "block";
+    letibudaletiBtnEl.style.display = "none";
     preloader.classList.add("preloader-show");
+    preloader.classList.add("preloader-fadeIn");
     this.setTimeout(() => {
       letibudaletiDivEl.style.display = "none";
       preloader.classList.remove("preloader-show");

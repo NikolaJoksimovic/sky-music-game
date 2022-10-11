@@ -13,6 +13,7 @@
   --clr-primary-text: rgba(255, 255, 255, 0.8);
   --clr-white09: rgba(255, 255, 255, 0.9);
   --clr-green: rgba(17, 107, 10, 0.74);
+  --clr-neon: rgb(255, 255, 255);
 }
 
 body {
@@ -48,7 +49,7 @@ button:hover {
   z-index: 11;
 }
 /* PRELOADER */
-#preloader {
+.preloader {
   z-index: 999;
   background: var(--clr-black) url("./assets/preloader/preloader.png") center
     no-repeat;
@@ -60,7 +61,18 @@ button:hover {
 .preloader-show {
   display: block !important;
 }
-/* LETI BUDA LETI EASTEREGG */
+@keyframes fadeIn5 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.preloader-fadeIn {
+  animation: fadeIn5 2s;
+}
+/* LETI BUDA LETI BUTTON */
 #letibudaleti {
   z-index: 998;
   position: fixed;
@@ -73,18 +85,61 @@ button:hover {
   justify-content: center;
   align-items: center;
 }
-.letibudaleti-btn-container {
-}
 .letibudaleti-btn {
-  margin: 0;
-  padding: 0;
   position: relative;
-  width: 100px;
-  height: 100px;
-  border-radius: 100%;
-  border-color: var(--clr-blood-red);
-  background-color: var(--clr-white);
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--clr-neon);
+  border: var(--clr-neon) 0.125em solid;
+  padding: 0.25em 1em;
+
+  text-shadow: 0 0 0.125em hsla(0, 0%, 100%, 0.1), 0 0 0.125em var(--clr-neon);
+  box-shadow: 0 0 0.5em 0 var(--clr-neon), inset 0 0 0.5em 0 var(--clr-neon) !important;
+  transition: background-color 100ms linear;
 }
+.letibudaleti-btn::before {
+  pointer-events: none; /*so that shadow doesnt trigger hover events on the button..*/
+  content: "";
+  position: absolute;
+  background-color: var(--clr-neon);
+  top: 120%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  transform: perspective(5em) rotateX(50deg) translateZ(-2em) scaleX(1.5);
+  filter: blur(1.3em);
+  opacity: 0.7;
+}
+.letibudaleti-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 2em 0.2em var(--clr-neon);
+  opacity: 0;
+  transition: opacity 100ms linear;
+}
+.letibudaleti-btn:hover,
+.letibudaleti-btn:focus {
+  background-color: var(--clr-neon);
+  color: var(--clr-black);
+  text-shadow: 0 0 0.2em black;
+}
+.letibudaleti-btn:hover::after,
+.letibudaleti-btn:focus::after {
+  opacity: 1;
+}
+.letibudaleti-btn:hover::before,
+.letibudaleti-btn:focus::before {
+  opacity: 1;
+}
+/* END OF LETIBUDALETI BUTTON */
+
 /* CANVAS ELEMENTS */
 #canvas-main {
   background-color: transparent;
