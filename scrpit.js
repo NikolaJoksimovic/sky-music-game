@@ -74,6 +74,7 @@ window.addEventListener("load", function () {
     this,
     "./assets/audio/letibudaleti_intro.wav"
   );
+  letibudaletiIntro.audio.volume = 0.35;
   letibudaletiBtnEl.addEventListener("click", (e) => {
     letibudaletiBtnEl.style.display = "none";
     preloader.classList.add("preloader-show");
