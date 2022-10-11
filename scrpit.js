@@ -24,7 +24,9 @@ window.addEventListener("load", function () {
     hitboxesEl = this.document.querySelector("#options-hitboxes"),
     godmodeEl = this.document.querySelector("#options-godmode"),
     soundOnBtnEl = this.document.querySelector("#mute-btn"),
-    sliderContainerEl = this.document.querySelector(".slider-container");
+    sliderContainerEl = this.document.querySelector(".slider-container"),
+    letibudaletiDivEl = this.document.getElementById("letibudaleti"),
+    letibudaletiBtnEl = this.document.querySelector(".letibudaleti-btn");
 
   let lastTime = 0;
   let enableCollision = true;
@@ -66,6 +68,17 @@ window.addEventListener("load", function () {
 
   canvasEl.width = 1280;
   canvasEl.height = 720;
+
+  // leti buda leti button
+  letibudaletiBtnEl.addEventListener("click", (e) => {
+    // preloader.style.display = "block";
+    preloader.classList.add("preloader-show");
+    this.setTimeout(() => {
+      letibudaletiDivEl.style.display = "none";
+      preloader.classList.remove("preloader-show");
+      console.log("hey");
+    }, 3000);
+  });
 
   // options button
   optionsBtnEl.addEventListener("click", (e) => {

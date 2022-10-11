@@ -55,6 +55,35 @@ button:hover {
   position: fixed;
   height: 100vh;
   width: 100vw;
+  transition: all 2s;
+}
+.preloader-show {
+  display: block !important;
+}
+/* LETI BUDA LETI EASTEREGG */
+#letibudaleti {
+  z-index: 998;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--clr-black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.letibudaleti-btn-container {
+}
+.letibudaleti-btn {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  border-color: var(--clr-blood-red);
+  background-color: var(--clr-white);
 }
 /* CANVAS ELEMENTS */
 #canvas-main {
