@@ -70,10 +70,15 @@ window.addEventListener("load", function () {
   canvasEl.height = 720;
 
   // leti buda leti button
+  const letibudaletiIntro = new Sound(
+    this,
+    "./assets/audio/letibudaleti_intro.wav"
+  );
   letibudaletiBtnEl.addEventListener("click", (e) => {
     letibudaletiBtnEl.style.display = "none";
     preloader.classList.add("preloader-show");
     preloader.classList.add("preloader-fadeIn");
+    letibudaletiIntro.play();
     this.setTimeout(() => {
       letibudaletiDivEl.style.display = "none";
       preloader.classList.remove("preloader-show");
