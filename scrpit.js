@@ -70,7 +70,10 @@ window.addEventListener("load", function () {
   canvasEl.height = 720;
 
   // leti buda leti button
-  const letibudaletiIntro = new Sound(this, "./assets/audio/f02.wav");
+  const letibudaletiIntro = new Sound(
+    this,
+    "./assets/audio/letibudaleti_intro.wav"
+  );
   letibudaletiIntro.audio.volume = 0.3;
   letibudaletiBtnEl.addEventListener("click", (e) => {
     letibudaletiBtnEl.style.display = "none";
